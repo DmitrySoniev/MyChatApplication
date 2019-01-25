@@ -37,9 +37,9 @@
                 <Button Content="Регистрация"/>
             </StackPanel>
         </DockPanel>
-        <DockPanel DockPanel.Dock="Bottom" Height="100">
+        <DockPanel DockPanel.Dock="Bottom" Height="50">
             <DockPanel >
-                <Button DockPanel.Dock="Right" Content="Отправить"/>
+                <Button  Width="150" DockPanel.Dock="Right" Content="Отправить"/>
                 <TextBox Text="Введите сообщение"/>
             </DockPanel>
         </DockPanel>
