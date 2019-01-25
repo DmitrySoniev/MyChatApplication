@@ -8,15 +8,13 @@
         Title="MainWindow" Height="450" Width="800" >
     <DockPanel >
         <DockPanel DockPanel.Dock="Left" Width="100" Visibility="Visible">
-
             <StackPanel DockPanel.Dock="Top" >
                 <TextBlock Text="Поиск Друзей"/>
                 <TextBox/>
-                <Button>Поиск</Button>
+                <Button Name="FindFriendsButton" >Поиск</Button>
                 <TextBlock Text="Друзья"/>
-
             </StackPanel>
-            <ListBox >
+            <ListBox>
                 <ListBox.Items>
                     <ListBoxItem>1</ListBoxItem>
                     <ListBoxItem>2</ListBoxItem>
@@ -30,16 +28,16 @@
         <DockPanel DockPanel.Dock="Right" Width="120">
             <StackPanel>
                 <TextBlock Text="Логин"/>
-                <TextBox/>
+                <TextBox Name="LoginTextBox"/>
                 <TextBlock Text="Пароль"/>
-                <TextBox/>
-                <Button Content="Войти"/>
-                <Button Content="Регистрация"/>
+                <PasswordBox Name="PasswordBox" />
+                <Button Name="AuthorizationButton" Content="Войти"/>
+                <Button Name="RegistrationButton"  Content="Регистрация"/>
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="50">
             <DockPanel >
-                <Button  Width="150" DockPanel.Dock="Right" Content="Отправить"/>
+                <Button Name="SendButton"  Width="150" DockPanel.Dock="Right" Content="Отправить"/>
                 <TextBox Text="Введите сообщение"/>
             </DockPanel>
         </DockPanel>
