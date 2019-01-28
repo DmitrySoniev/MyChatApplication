@@ -40,37 +40,37 @@ namespace TestingTemplate
         {
             if (LoginTextBox.Text == "")
             {
-                MessageBox.Show("Введите логин!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите логин.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (PasswordBox.Password == "")
             {
-                MessageBox.Show("Введите пароль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (ConfirmPasswordBox.Password == "")
             {
-                MessageBox.Show("Введите подтвержденный пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите подтвержденный пароль", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (PasswordBox.Password != ConfirmPasswordBox.Password)
             {
-                MessageBox.Show("Пароли не совпадают!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Пароли не совпадают.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (NameTextbox.Text == "")
             {
-                MessageBox.Show("Введите имя пользователя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите имя пользователя.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (SurnameTextbox.Text == "")
             {
-                MessageBox.Show("Введите фамилию пользователя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите фамилию пользователя.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (WomanRadioButton.IsChecked == false && ManRadioButton.IsChecked == false)
             {
-                MessageBox.Show("Пожалуйста укажите пол", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Пожалуйста укажите пол.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -82,7 +82,6 @@ namespace TestingTemplate
                     MainWindow mainWindow = new MainWindow();
                     this.Close();
                     mainWindow.ShowDialog();
-                   
                 }
             }
 

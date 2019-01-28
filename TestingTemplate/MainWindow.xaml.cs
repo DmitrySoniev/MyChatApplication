@@ -68,17 +68,17 @@ namespace TestingTemplate
             string password = "soniev";
             if (LoginTextBox.Text == "")
             {
-                MessageBox.Show("Введите логин", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите логин.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (PasswordBox.Password == "")
             {
-                MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите пароль.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (LoginTextBox.Text != login && PasswordBox.Password != password)
             {
-                MessageBox.Show("Пожалуйста, проверьте правильность написания логина и пароля и повторите попытку", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Пожалуйста, проверьте правильность написания логина и пароля. Повторите попытку позже.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (LoginTextBox.Text == login && PasswordBox.Password == password)
