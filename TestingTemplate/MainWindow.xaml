@@ -6,50 +6,73 @@
         xmlns:local="clr-namespace:TestingTemplate"
         mc:Ignorable="d"
         Title="Чат" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\soniev\source\repos\TestingTemplate\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg"/>
+    </Window.Background>
+    <Window.Resources>
+        
+        <Style x:Key="TextboxStyle" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Helvetica"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStretch" Value="Expanded"/>
+        </Style>
+        
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Helvetica"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStretch" Value="Expanded"/>
+            <Setter Property="Background" Value="Silver"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Helvetica"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStretch" Value="Expanded"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style x:Key="ListboxStyle" TargetType="ListBox">
+            <Setter Property="FontFamily" Value="Helvetica"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStretch" Value="Expanded"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Left" Width="100" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
-                <TextBlock Text="Поиск Друзей"/>
-                <TextBox Name="FindFriendsTextbox"/>
-                <Button Name="FindFriendsButton">Поиск</Button>
-                <TextBlock Text="Друзья"/>
+                <TextBlock Text="Поиск" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox Name="FindFriendsTextbox" Style="{StaticResource TextboxStyle}"/>
+                <Button Name="FindFriendsButton" Style="{StaticResource ButtonStyle}">Поиск</Button>
+                <TextBlock Text="Работники" Style="{StaticResource TextBlockStyle}"/>
             </StackPanel>
-            <ListBox Name="FriendsListBox">
-                <ListBox.Items>
-                    <ListBoxItem>1</ListBoxItem>
-                    <ListBoxItem>2</ListBoxItem>
-                    <ListBoxItem>3</ListBoxItem>
-                    <ListBoxItem>4</ListBoxItem>
-                    <ListBoxItem>5</ListBoxItem>
-                    <ListBoxItem>6</ListBoxItem>
-                </ListBox.Items>
+            <ListBox Name="FriendsListBox" Style="{StaticResource ListboxStyle}">
+                
             </ListBox>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
             <StackPanel>
-                <TextBlock Text="Логин"/>
-                <TextBox Name="LoginTextBox"/>
-                <TextBlock Text="Пароль"/>
+                <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox Name="LoginTextBox" Style="{StaticResource TextboxStyle}"/>
+                <TextBlock Text="Пароль" Style="{StaticResource TextBlockStyle}"/>
                 <PasswordBox Name="PasswordBox" />
-                <Button Name="AuthorizationButton" Content="Войти"/>
-                <Button Name="RegistrationButton"  Content="Регистрация" Click="RegistrationButton_Click"/>
+                <Button Name="AuthorizationButton" Content="Войти" Style="{StaticResource ButtonStyle}" Click="AuthorizationButton_Click"/>
+                <Button x:Name="RegistrationButton"  Content="Регистрация" Click="RegistrationButton_Click" Style="{StaticResource ButtonStyle}"/>
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="50">
             <DockPanel>
-                <Button Name="SendButton"  Width="150" DockPanel.Dock="Right" Content="Отправить" Click="SendButton_Click"/>
-                <TextBox x:Name="SendMessageTextBox" PreviewMouseLeftButtonDown="SendMessageTextBox_PreviewMouseLeftButtonDown" Foreground="DarkGray"/>
+                <Button Name="SendButton"  Width="150" DockPanel.Dock="Right" Content="Отправить" Click="SendButton_Click" FontFamily="Helvetica" FontSize="15" FontStretch="Expanded"/>
+                <TextBox x:Name="SendMessageTextBox" PreviewMouseLeftButtonDown="SendMessageTextBox_PreviewMouseLeftButtonDown" Foreground="DarkGray" Style="{StaticResource TextboxStyle}"/>
             </DockPanel>
         </DockPanel>
         <DockPanel>
-            <ListBox Name="MessageListBox">
-                <ListBox.Items>
-                    <ListBoxItem>1</ListBoxItem>
-                    <ListBoxItem>2</ListBoxItem>
-                    <ListBoxItem>3</ListBoxItem>
-                    <ListBoxItem>4</ListBoxItem>
-                    <ListBoxItem>5</ListBoxItem>
-                </ListBox.Items>
+            <ListBox Name="MessageListBox" Style="{StaticResource ListboxStyle}">
+                
             </ListBox>
         </DockPanel>
     </DockPanel>

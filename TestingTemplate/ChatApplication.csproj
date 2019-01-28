@@ -101,5 +101,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Backgrounds\BackgroundForRegistration.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Backgrounds\BackgroundForMainWindow.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,18 +23,36 @@ namespace TestingTemplate
         public MainWindow()
         {
             InitializeComponent();
+            LoginTextBox.MaxLength = 15;
+            PasswordBox.MaxLength = 15;
             SendMessageTextBox.Text = "Напишите сообщение...";
+
+
         }
 
         private void SendMessageTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SendMessageTextBox.Clear();
             SendMessageTextBox.Foreground = Brushes.Black;
+            SendButton.IsEnabled = true;
+
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            SendMessageTextBox.Text = "Напишите сообщение...";
-            SendMessageTextBox.Foreground = Brushes.DarkGray;
+            if (SendMessageTextBox.Text == "")
+            {
+                SendButton.IsEnabled = false;
+                SendMessageTextBox.Text = "Напишите сообщение...";
+                SendMessageTextBox.Foreground = Brushes.DarkGray;
+                return;
+            }
+            if (SendMessageTextBox.Text != "")
+            {
+                SendMessageTextBox.Clear();
+                MessageListBox.Items.Add("Привет!");
+                return;
+            }
+
         }
 
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
@@ -42,6 +60,32 @@ namespace TestingTemplate
             Registration registrationWindow = new Registration();
             this.Close();
             registrationWindow.ShowDialog();
+        }
+
+        private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
+        {
+            string login = "dmitry";
+            string password = "soniev";
+            if (LoginTextBox.Text == "")
+            {
+                MessageBox.Show("Введите логин", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (PasswordBox.Password == "")
+            {
+                MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (LoginTextBox.Text != login && PasswordBox.Password != password)
+            {
+                MessageBox.Show("Пожалуйста, проверьте правильность написания логина и пароля и повторите попытку", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (LoginTextBox.Text == login && PasswordBox.Password == password)
+            {
+                MessageBox.Show("Авторизация прошла успешно!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
     }
 }
