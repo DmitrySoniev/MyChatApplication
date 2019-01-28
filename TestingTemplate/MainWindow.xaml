@@ -1,14 +1,14 @@
-﻿<Window x:Class="TestingTemplate.MainWindow"
+﻿<Window x:Name="mainWindowChat" x:Class="TestingTemplate.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingTemplate"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
-    <DockPanel >
+        Title="Чат" Height="450" Width="800">
+    <DockPanel>
         <DockPanel DockPanel.Dock="Left" Width="100" Visibility="Visible">
-            <StackPanel DockPanel.Dock="Top" >
+            <StackPanel DockPanel.Dock="Top">
                 <TextBlock Text="Поиск Друзей"/>
                 <TextBox Name="FindFriendsTextbox"/>
                 <Button Name="FindFriendsButton">Поиск</Button>
@@ -32,13 +32,13 @@
                 <TextBlock Text="Пароль"/>
                 <PasswordBox Name="PasswordBox" />
                 <Button Name="AuthorizationButton" Content="Войти"/>
-                <Button Name="RegistrationButton"  Content="Регистрация"/>
+                <Button Name="RegistrationButton"  Content="Регистрация" Click="RegistrationButton_Click"/>
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="50">
-            <DockPanel >
-                <Button Name="SendButton"  Width="150" DockPanel.Dock="Right" Content="Отправить"/>
-                <TextBox x:Name="SendMessageTextBox" Text="Введите сообщение"/>
+            <DockPanel>
+                <Button Name="SendButton"  Width="150" DockPanel.Dock="Right" Content="Отправить" Click="SendButton_Click"/>
+                <TextBox x:Name="SendMessageTextBox" PreviewMouseLeftButtonDown="SendMessageTextBox_PreviewMouseLeftButtonDown" Foreground="DarkGray"/>
             </DockPanel>
         </DockPanel>
         <DockPanel>

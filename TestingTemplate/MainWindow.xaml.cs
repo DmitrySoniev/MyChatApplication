@@ -23,6 +23,25 @@ namespace TestingTemplate
         public MainWindow()
         {
             InitializeComponent();
-        }   
+            SendMessageTextBox.Text = "Напишите сообщение...";
+        }
+
+        private void SendMessageTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SendMessageTextBox.Clear();
+            SendMessageTextBox.Foreground = Brushes.Black;
+        }
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessageTextBox.Text = "Напишите сообщение...";
+            SendMessageTextBox.Foreground = Brushes.DarkGray;
+        }
+
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Registration registrationWindow = new Registration();
+            this.Close();
+            registrationWindow.ShowDialog();
+        }
     }
 }
