@@ -23,11 +23,6 @@ namespace TestingTemplate
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void CenterButton_Click(object sender, RoutedEventArgs e)
-        {
-            //192.168.1.97
-        }
+        }   
     }
 }
