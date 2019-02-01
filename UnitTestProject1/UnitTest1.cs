@@ -41,7 +41,7 @@ namespace UnitTestProject1
                 Login = "Ivan",
                 Password = "123456",
                 Name = "Ivan",
-                LastName = "Ivanov",
+                Surname = "Ivanov",
                 Gender = true
             };
             var res = chat.Registration(data);
@@ -57,7 +57,6 @@ namespace UnitTestProject1
             {
                 Login = "Ivan",
                 Password = "123456"
-
             };
             var res = chat.Login(user);
 

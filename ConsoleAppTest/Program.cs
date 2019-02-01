@@ -12,7 +12,7 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
             var chat = new Chat();
-            chat.SendMessage("Ivan", "Ivanov")
+            chat.SendMessage("Ivan", "Ivanov");
 
         }
     }
