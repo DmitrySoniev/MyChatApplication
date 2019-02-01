@@ -10,13 +10,13 @@
         <ImageBrush ImageSource="C:\Users\soniev\source\repos\TestingTemplate\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg"/>
     </Window.Background>
     <Window.Resources>
-        
+
         <Style x:Key="TextboxStyle" TargetType="TextBox">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStretch" Value="Expanded"/>
         </Style>
-        
+
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
@@ -28,14 +28,14 @@
                 </Style>
             </Style.Resources>
         </Style>
-        
+
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStretch" Value="Expanded"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
-        
+
         <Style x:Key="ListboxStyle" TargetType="ListBox">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
@@ -51,7 +51,7 @@
                 <TextBlock Text="Работники" Style="{StaticResource TextBlockStyle}"/>
             </StackPanel>
             <ListBox Name="FriendsListBox" Style="{StaticResource ListboxStyle}">
-                
+
             </ListBox>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
@@ -72,7 +72,6 @@
         </DockPanel>
         <DockPanel>
             <ListBox Name="MessageListBox" Style="{StaticResource ListboxStyle}">
-                
             </ListBox>
         </DockPanel>
     </DockPanel>

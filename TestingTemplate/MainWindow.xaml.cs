@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.AspNet.SignalR.Client;
 
 namespace TestingTemplate
 {
@@ -26,26 +28,25 @@ namespace TestingTemplate
             LoginTextBox.MaxLength = 15;
             PasswordBox.MaxLength = 15;
             SendMessageTextBox.Text = "Напишите сообщение...";
-
-
+      
         }
 
+      
+      
         private void SendMessageTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SendMessageTextBox.Clear();
             SendMessageTextBox.Foreground = Brushes.Black;
-            SendButton.IsEnabled = true;
-
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             if (SendMessageTextBox.Text == "")
             {
-                SendButton.IsEnabled = false;
                 SendMessageTextBox.Text = "Напишите сообщение...";
                 SendMessageTextBox.Foreground = Brushes.DarkGray;
                 return;
             }
+            //Заглушка
             if (SendMessageTextBox.Text != "")
             {
                 SendMessageTextBox.Clear();
