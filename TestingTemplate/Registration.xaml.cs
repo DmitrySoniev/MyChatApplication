@@ -32,11 +32,11 @@ namespace TestingTemplate
             ConfirmPasswordBox.MaxLength = 15;
             NameTextbox.MaxLength = 15;
             SurnameTextbox.MaxLength = 15;
-            connection = new Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder()
-                .WithUrl("https://localhost:44375/Chat")
-                .Build();
+            //connection = new Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder()
+            //    .WithUrl("https://localhost:44375/Chat")
+            //    .Build();
             //connection.On<string, string>("ReceiveMessage", Print);
-            connection.StartAsync().Wait();
+            //connection.StartAsync().Wait();
             
         }
         

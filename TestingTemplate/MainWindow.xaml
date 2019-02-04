@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Чат" Height="450" Width="800">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Дмитрий\Source\Repos\MyChatApplication\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg"/>
+        <ImageBrush ImageSource="C:\Users\soniev\source\repos\TestingTemplate\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg"/>
     </Window.Background>
     <Window.Resources>
 

@@ -30,19 +30,17 @@ namespace UnitTestProject1
             Assert.AreEqual(Message, chat.History.Last().TextMessage);
             Assert.AreEqual(User, chat.History.Last().User);
         }
-
-
+        
         [TestMethod]
         public void Register()
         {
-
-            var data = new RegisterData
+            var data = new RegisterData()
             {
                 Login = "Ivan",
                 Password = "123456",
                 Name = "Ivan",
                 Surname = "Ivanov",
-                Gender = true
+                Gender = "man"
             };
             var res = chat.Registration(data);
 
@@ -62,14 +60,10 @@ namespace UnitTestProject1
 
             Assert.IsTrue(res.Success, res.ErrorMessage);
         }
-
-
-
-
+        
         [TestMethod]
         public async Task UpdateAsync()
         {
-
             //var user = new User()
             //{
             //    Login = "Ivan",
@@ -80,9 +74,7 @@ namespace UnitTestProject1
             //Assert.IsTrue(res.Success, res.ErrorMessage);
 
             var sw = Stopwatch.StartNew();
-
             int countMessage = 0;
-
             chat.UpdateHistory += delegate (List<Message> history)
             {
                 foreach (var message in history)
@@ -98,7 +90,6 @@ namespace UnitTestProject1
             }
 
             var timeOut = TimeSpan.FromSeconds(5);
-
             while (sw.Elapsed < timeOut)
             {
                 await Task.Delay(1);
@@ -106,9 +97,6 @@ namespace UnitTestProject1
 
             Assert.AreNotEqual(0, countMessage);
             Assert.AreEqual(5, countMessage);
-
         }
-
-
     }
 }

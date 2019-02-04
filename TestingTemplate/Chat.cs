@@ -12,10 +12,11 @@ namespace TestingTemplate
 
         public Chat()
         {
-            connection = new Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder()
-                .WithUrl("https://localhost:44375/Chat")
+            connection = new HubConnectionBuilder()
+                .WithUrl("http://192.168.1.62:50338/chat")
                 .Build();
             connection.On<string, string>("ReceiveMessage", (user, message) => UpdateMessage(user, message));
+
             History = new List<Message>();
             UpdateMessage += ChatUpdateMessage;
         }
@@ -30,36 +31,28 @@ namespace TestingTemplate
 
         public Status Login(User user)
         {
-            string login = "Ivan";
-            string password = "123456";
-            login = user.Login;
-            password = user.Password;
-            return new Status { Success = true };
+            throw new NotImplementedException();
+            return new Status {Success = true};
         }
 
         public Status Registration(RegisterData data)
         {
-            string login = "Ivan";
-            string password = "123456";
-            string name = "Ivan";
-            string surname = "Ivanov";
-            bool gender;
-            login = data.Login;
-            password = data.Password;
-            name = data.Name;
-            surname = data.Surname;
-            gender = true;
-            return new Status { Success = true };
+            throw new NotImplementedException();
+            return new Status {Success = true};
         }
 
         public Status SendMessage(string user, string message)
         {
             //if (_connect)
             //{
-            //    throw new NotImplementedException();
-            user = "Ivan";
-            message = "Hi";
-                return new Status { Success = true };
+            //throw new NotImplementedException();
+
+            //user = "Ivan";
+            //message = "Hi";
+            //UpdateMessage(user, message);
+            throw new NotImplementedException();
+
+            //return new Status { Success = true };
             //}
             //else
             //{
@@ -69,7 +62,7 @@ namespace TestingTemplate
 
         private void ChatUpdateMessage(string user, string message)
         {
-            History.Add(new Message { User = user, TextMessage = message });
+            History.Add(new Message {User = user, TextMessage = message});
             UpdateHistory(History);
         }
     }
