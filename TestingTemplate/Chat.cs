@@ -49,7 +49,7 @@ namespace TestingTemplate
 
             //user = "Ivan";
             //message = "Hi";
-            //UpdateMessage(user, message);
+            //UpdateMessage(user, message);7
             throw new NotImplementedException();
 
             //return new Status { Success = true };

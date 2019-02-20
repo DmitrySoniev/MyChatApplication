@@ -6,27 +6,24 @@
         xmlns:local="clr-namespace:TestingTemplate"
         mc:Ignorable="d"
         Title="Чат" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainVM/>
+    </Window.DataContext>
     <Window.Background>
         <ImageBrush ImageSource="C:\Users\soniev\source\repos\TestingTemplate\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg"/>
     </Window.Background>
     <Window.Resources>
-
         <Style x:Key="TextboxStyle" TargetType="TextBox">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontStretch" Value="Expanded"/>
+            
         </Style>
-
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStretch" Value="Expanded"/>
             <Setter Property="Background" Value="Silver"/>
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Style.Resources>
+            
         </Style>
 
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">
@@ -51,17 +48,16 @@
                 <TextBlock Text="Работники" Style="{StaticResource TextBlockStyle}"/>
             </StackPanel>
             <ListBox Name="FriendsListBox" Style="{StaticResource ListboxStyle}">
-
             </ListBox>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
             <StackPanel>
                 <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}"/>
-                <TextBox Name="LoginTextBox" Style="{StaticResource TextboxStyle}"/>
-                <TextBlock Text="Пароль" Style="{StaticResource TextBlockStyle}"/>
-                <PasswordBox Name="PasswordBox" />
-                <Button Name="AuthorizationButton" Content="Войти" Style="{StaticResource ButtonStyle}" Click="AuthorizationButton_Click"/>
-                <Button x:Name="RegistrationButton"  Content="Регистрация" Click="RegistrationButton_Click" Style="{StaticResource ButtonStyle}"/>
+                <TextBox Name="LoginTextBox" Style="{StaticResource TextboxStyle}" Text="{Binding loginTextBox}"/>
+                    <TextBlock Text="Пароль" Style="{StaticResource TextBlockStyle}"/>
+                <PasswordBox Name="PasswordBox"/>
+                <Button x:Name="AuthorizationButton" Content="Войти" Style="{StaticResource ButtonStyle}" Command ="{Binding AuthorizationCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>
+                <Button x:Name="RegistrationButton" Content="Регистрация" Style="{StaticResource ButtonStyle }" Command ="{Binding RegistrationCommand}"/>
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="50">

@@ -36,19 +36,26 @@ namespace TestingTemplate
             //    .WithUrl("https://localhost:44375/Chat")
             //    .Build();
             //connection.On<string, string>("ReceiveMessage", Print);
-            //connection.StartAsync().Wait();
-            
+            //connection.StartAsync().Wait();           
         }
-        
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReturnToMainWindow();
+        }
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationMethod();
+        }
+
+        private void ReturnToMainWindow()
         {
             MainWindow mainWindow = new MainWindow();
             this.Close();
             mainWindow.ShowDialog();
         }
-        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        private void RegistrationMethod()
         {
-
             if (LoginTextBox.Text == "")
             {
                 MessageBox.Show("Введите логин.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -91,11 +98,12 @@ namespace TestingTemplate
                 return;
             }
 
-            if (LoginTextBox.Text != "" && PasswordBox.Password != "" && ConfirmPasswordBox.Password != "" && NameTextbox.Text != "" && SurnameTextbox.Text != "")
+            if (LoginTextBox.Text != "" && PasswordBox.Password != "" && ConfirmPasswordBox.Password != "" &&
+                NameTextbox.Text != "" && SurnameTextbox.Text != "")
             {
                 if (PasswordBox.Password == ConfirmPasswordBox.Password)
                 {
-                    
+
                     if (ManRadioButton.IsChecked == true)
                     {
                         string loginMan;
@@ -137,12 +145,6 @@ namespace TestingTemplate
 
                 }
             }
-
         }
-        public static void Print()
-        {
-
-        }
-
     }
 }
