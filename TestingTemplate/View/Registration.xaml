@@ -11,9 +11,10 @@
         <VM:RegistrationViewModel/>
     </Window.DataContext>
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Дмитрий\Source\Repos\DmitrySoniev\MyChatApplication\TestingTemplate\Backgrounds\\BackgroundForRegistration.jpg"/>
+        <ImageBrush ImageSource="C:\Users\soniev\source\repos\TestingTemplate\TestingTemplate\Backgrounds\BackgroundForRegistration.jpg"/>
     </Window.Background>
     <Window.Resources>
+        <local:GenderConverter x:Key="genderConverterKey" />
         <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
@@ -30,8 +31,9 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStretch" Value="Expanded"/>
             <Setter Property="Foreground" Value="White"/>
+
         </Style>
-        <Style x:Key="ButtonStyle" TargetType="Button">
+                <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontStretch" Value="Expanded"/>
@@ -53,15 +55,15 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" Margin="181,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Style="{StaticResource TextBoxStyle}" Text="{Binding registrationModel.login}"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" Margin="181,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Style="{StaticResource TextBoxStyle}" Text="{Binding registrationModel.Login}"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,54,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}" />
         <TextBlock HorizontalAlignment="Left" Margin="11,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Имя" Style="{StaticResource TextBlockStyle}"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" Margin="181,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Style="{StaticResource TextBoxStyle}" Text="{Binding registrationModel.name}"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" Margin="181,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Style="{StaticResource TextBoxStyle}" Text="{Binding registrationModel.Name}"/>
         <TextBlock  HorizontalAlignment="Left" Margin="11,136,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}"/>
-        <TextBox  HorizontalAlignment="Left" Height="23" Margin="181,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Style="{StaticResource TextBoxStyle}" Text="{Binding registrationModel.surname}"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" Margin="181,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Style="{StaticResource TextBoxStyle}" Text="{Binding registrationModel.Surname}"/>
         <TextBlock HorizontalAlignment="Left" Margin="13,182,0,0" TextWrapping="Wrap" Text="Пол" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}"/>
-        <RadioButton  Content="Мужской" Command="{Binding RadioCommand}" HorizontalAlignment="Left" Margin="116,186,0,0" VerticalAlignment="Top" Style="{StaticResource RadioButtonStyle}"/>
-        <RadioButton  Content="Женский" HorizontalAlignment="Left" Margin="224,186,0,0" VerticalAlignment="Top" Style="{StaticResource RadioButtonStyle}"/>
+        <RadioButton  Content="Мужской" Command="{Binding RadioCommand}" HorizontalAlignment="Left" Margin="116,186,0,0" VerticalAlignment="Top" Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding Gender, Converter={StaticResource ResourceKey=genderConverterKey}, ConverterParameter=Male}"/>
+        <RadioButton  Content="Женский" HorizontalAlignment="Left" Margin="224,186,0,0" VerticalAlignment="Top" Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding Gender, Converter={StaticResource ResourceKey=genderConverterKey}, ConverterParameter=Female}" />
         <Button Name="RegistrationButton" Content="Регистрация"  Command="{Binding RegistrationCommand}" CommandParameter="{Binding ElementName=PasswordBox}" HorizontalAlignment="Left" Margin="181,224,0,0" VerticalAlignment="Top" Width="108" RenderTransformOrigin="-0.4,1.15" Style="{StaticResource ButtonStyle}" Height="31"/>
         <Button Name="BackButton" Content="Назад" HorizontalAlignment="Left" Margin="36,224,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource ButtonStyle}" Height="30" Command="{Binding BackCommand}"/>
         <PasswordBox Name ="PasswordBox" HorizontalAlignment="Left" Margin="181,45,0,0" VerticalAlignment="Top" Width="120" Height="23" Style="{StaticResource PasswordBoxStyle}"/>

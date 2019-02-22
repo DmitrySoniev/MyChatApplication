@@ -7,47 +7,46 @@ using System.Threading.Tasks;
 
 namespace TestingTemplate.Model
 {
-   public class RegistrationModel : INotifyPropertyChanged
-    {
-        private string _login;
+	public class RegistrationModel : INotifyPropertyChanged
+	{
+		private string _login;
 
-        public string login
-        {
-            get { return _login; }
-            set
-            {
-                _login = value;
-                this.OnPropertyChanged("LoginTextBox");
-            }
-        }
+		public string Login
+		{
+			get { return _login; }
+			set
+			{
+				_login = value;
 
-        private string _name;
+			}
+		}
 
-        public string name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                this.OnPropertyChanged("NameTextBox");
-            }
-        }
+		private string _name;
 
-        private string _surname;
-        public string surname
-        {
-            get { return _surname; }
-            set
-            {
-                _surname = value;
-                this.OnPropertyChanged("");
-            }
-        }
+		public string Name
+		{
+			get { return _name; }
+			set
+			{
+				_name = value;
+			}
+		}
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
+		private string _surname;
+		public string Surname
+		{
+			get { return _surname; }
+			set
+			{
+				_surname = value;
+
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void OnPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
 }

@@ -50,8 +50,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Login()
         {
-
-            var user = new User()
+			var user = new User()
             {
                 Login = "Ivan",
                 Password = "123456"

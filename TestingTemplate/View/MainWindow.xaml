@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:TestingTemplate.ViewModel"      
         mc:Ignorable="d"
         Title="Чат" Height="450" Width="800">
+   
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Дмитрий\Source\Repos\DmitrySoniev\MyChatApplication\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg"/>
+        <ImageBrush ImageSource="C:\Users\soniev\source\repos\TestingTemplate\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg"/>
     </Window.Background>
     <Window.Resources>
         <Style x:Key="TextboxStyle" TargetType="TextBox">
@@ -53,7 +54,7 @@
         <DockPanel DockPanel.Dock="Right" Width="120">
             <StackPanel>
                 <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}"/>
-                <TextBox Name="LoginTextBox" Style="{StaticResource TextboxStyle}" Text="{Binding login.LoginTextBox}"/>
+                <TextBox Name="LoginTextBox" Style="{StaticResource TextboxStyle}" Text="{Binding LoginMainModel.Login}"/>
                     <TextBlock Text="Пароль" Style="{StaticResource TextBlockStyle}"/>
                 <PasswordBox Name="PasswordBox" Height="24"/>
                 <Button x:Name="AuthorizationButton" Content="Войти" Style="{StaticResource ButtonStyle}" Command ="{Binding AuthorizationCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>

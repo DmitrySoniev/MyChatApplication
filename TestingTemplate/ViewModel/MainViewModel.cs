@@ -35,18 +35,18 @@ namespace TestingTemplate.ViewModel
         {
             _login = new MainModel();
 
-            AuthorizationCommand = new RelayCommand(param => authCommand(param));
+            AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
 
-            RegistrationCommand = new RelayCommand(param => registration());
+            RegistrationCommand = new RelayCommand(param => Registration());
         }
 
-        public MainModel login
+        public MainModel LoginMainModel
         {
             get { return _login; }
             set { _login = value; }
         }
 
-        private void registration()
+        private void Registration()
         {
             Registration registrationWindow = new Registration();
 
@@ -55,17 +55,17 @@ namespace TestingTemplate.ViewModel
             registrationWindow.ShowDialog();
         }
 
-        private void authCommand(object param)
+        private void AuthCommand(object param)
         {
-            if (login.LoginTextBox == null)
+            if (LoginMainModel.Login == null)
             {
                 MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (login.LoginTextBox == "")
+            if (LoginMainModel.Login == "")
             {
-                MessageBox.Show("введите логин!", "ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
