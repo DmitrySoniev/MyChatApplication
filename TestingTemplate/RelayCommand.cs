@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace APIDog.Core
+namespace TestingTemplate
 {
     internal class RelayCommand : ICommand
     {
