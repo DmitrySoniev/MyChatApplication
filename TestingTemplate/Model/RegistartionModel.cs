@@ -1,52 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+
 
 namespace TestingTemplate.Model
 {
-	public class RegistrationModel : INotifyPropertyChanged
-	{
-		private string _login;
+    public class RegistrationModel : INotifyPropertyChanged
+    {
+        public string Login { get; set; }
 
-		public string Login
-		{
-			get { return _login; }
-			set
-			{
-				_login = value;
+        public string Name { get; set; }
 
-			}
-		}
+        public string Surname { get; set; }
 
-		private string _name;
+        private bool _genderMan;
+        public bool GenderMan
+        {
+            get { return _genderMan; }
+            set
+            {
+                _genderMan = value;
+                OnPropertyChanged("GenderMan");
+            }
+        }
 
-		public string Name
-		{
-			get { return _name; }
-			set
-			{
-				_name = value;
-			}
-		}
-
-		private string _surname;
-		public string Surname
-		{
-			get { return _surname; }
-			set
-			{
-				_surname = value;
-
-			}
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+        private bool _genderWoman;
+        public bool GenderWoman
+        {
+            get { return _genderWoman; }
+            set
+            {
+                _genderWoman = value;
+                OnPropertyChanged("GenderWoman");
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }
