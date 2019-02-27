@@ -35,9 +35,11 @@ namespace TestingTemplate.ViewModel
         {
             _login = new MainModel();
 
-            AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
+			//OnPasswordFinish = new RelayCommand(param => AuthCommand(param));
 
-            RegistrationCommand = new RelayCommand(param => Registration());
+			AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
+
+			RegistrationCommand = new RelayCommand(param => Registration());
         }
 
         public MainModel LoginMainModel
