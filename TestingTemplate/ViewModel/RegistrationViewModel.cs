@@ -1,104 +1,122 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using TestingTemplate.Model;
 
 namespace TestingTemplate.ViewModel
 {
-	public class RegistrationViewModel : INotifyPropertyChanged
-	{
-		private RegistrationModel _registrationViewModel;
+    public class RegistrationViewModel
+    {
 
-		public ICommand RegistrationCommand { get; set; }
+        public ICommand RegistrationCommand { get; set; }
 
-		public ICommand BackCommand { get; set; }
+        public ICommand BackCommand { get; set; }
 
-		public Action CloseAction { get; set; }
+        public Action CloseAction { get; set; }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		protected virtual void OnPropertyChanged(string PropertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-		}
+        protected virtual void OnPropertyChanged(string PropertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
 
-		public RegistrationViewModel()
-		{
-			_registrationViewModel = new RegistrationModel();
-			RegistrationCommand = new RelayCommand(param => Registration(param));
-			BackCommand = new RelayCommand(param => Back());
-		}
+        public RegistrationViewModel()
+        {
+            RegistrationModel = new RegistrationModel();
+            RegistrationCommand = new RelayCommand(param => Registration(param));
+            BackCommand = new RelayCommand(param => Back());
+        }
 
-		public RegistrationModel registrationModel
-		{
-			get { return _registrationViewModel; }
-			set { _registrationViewModel = value; }
-		}
+        public RegistrationModel RegistrationModel { get; set; }
 
-		public void Back()
-		{
-			MainWindow mainWindow = new MainWindow();
-			CloseAction();
-			mainWindow.ShowDialog();
-		}
+        public void Back()
+        {
+            MainWindow mainWindow = new MainWindow();
 
-		public void Registration(object param)
-		{
-			if (registrationModel.Login == null)
-			{
-				MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+            CloseAction();
 
-			if (registrationModel.Login == "")
-			{
-				MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+            mainWindow.ShowDialog();
+        }
 
-			var passwordBox = param as PasswordBox;
 
-			if (passwordBox == null)
-				return;
+        public void Registration(object param)
+        {
+            #region CheckingForNull
 
-			var password = passwordBox.Password;
+            if (RegistrationModel.Login == null)
+            {
+                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-			if (password == "")
-			{
-				MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+            if (RegistrationModel.Login == "")
+            {
+                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-			if (registrationModel.Name == null)
-			{
-				MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
-			if (registrationModel.Name == "")
-			{
-				MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+            var passwordBox = param as PasswordBox;
 
-			if (registrationModel.Surname == null)
-			{
-				MessageBox.Show("Введите фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+            if (passwordBox == null)
+                return;
 
-			if (registrationModel.Surname == "")
-			{
-				MessageBox.Show("Введите Фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
-		}
-	}
+            var password = passwordBox.Password;
+            if (password == "")
+            {
+                MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (RegistrationModel.Name == null)
+            {
+                MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (RegistrationModel.Name == "")
+            {
+                MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (RegistrationModel.Surname == null)
+            {
+                MessageBox.Show("Введите фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (RegistrationModel.Surname == "")
+            {
+                MessageBox.Show("Введите Фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (RegistrationModel.GenderMan == false && RegistrationModel.GenderWoman == false)
+            {
+                MessageBox.Show("Пожалуйста укажите пол.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            #endregion
+
+            if (RegistrationModel.GenderMan == true)
+            {
+                MessageBox.Show("Регистрация прошла успешно!", "Успешно!", MessageBoxButton.OK,MessageBoxImage.Information);
+                //Должна быть логика
+                MainWindow mainWindow = new MainWindow();
+                CloseAction();
+                mainWindow.ShowDialog();
+            }
+            if (RegistrationModel.GenderWoman == true)
+            {
+                MessageBox.Show("Регистрация прошла успешно!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                //Должна быть логика
+                MainWindow mainWindow = new MainWindow();
+                CloseAction();
+                mainWindow.ShowDialog();
+            }
+        }
+    }
 }

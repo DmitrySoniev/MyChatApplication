@@ -1,23 +1,15 @@
-﻿using TestingTemplate;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Data;
 using System.Windows.Controls;
 using System.Windows;
 using TestingTemplate.Model;
-using System.Collections.ObjectModel;
+
 
 namespace TestingTemplate.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private MainModel _login;
-
         public Action CloseAction { get; set; }
 
         public ICommand RegistrationCommand { get; set; }
@@ -33,6 +25,13 @@ namespace TestingTemplate.ViewModel
 
         public MainViewModel()
         {
+
+            LoginMainModel = new MainModel();
+            
+            AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
+
+            RegistrationCommand = new RelayCommand(param => Registration());
+           
             _login = new MainModel();
 
 			//OnPasswordFinish = new RelayCommand(param => AuthCommand(param));
@@ -40,13 +39,10 @@ namespace TestingTemplate.ViewModel
 			AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
 
 			RegistrationCommand = new RelayCommand(param => Registration());
+
         }
 
-        public MainModel LoginMainModel
-        {
-            get { return _login; }
-            set { _login = value; }
-        }
+        public MainModel LoginMainModel { get; set; }
 
         private void Registration()
         {
@@ -59,6 +55,8 @@ namespace TestingTemplate.ViewModel
 
         private void AuthCommand(object param)
         {
+            #region CheckingForNullLoginAndPassword
+
             if (LoginMainModel.Login == null)
             {
                 MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -82,6 +80,7 @@ namespace TestingTemplate.ViewModel
                 MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            #endregion CheckingForNullLoginAndPassword
         }
     }
     //public class users : INotifyPropertyChanged
