@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TestingTemplate.ViewModel"      
+        xmlns:local="clr-namespace:TestingTemplate.ViewModel"
         mc:Ignorable="d"
         Title="Чат" Height="450" Width="800">
     <Window.DataContext>
@@ -53,10 +53,22 @@
         <DockPanel DockPanel.Dock="Right" Width="120">
             <StackPanel>
                 <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}"/>
-                <TextBox Name="LoginTextBox" Style="{StaticResource TextboxStyle}" Text="{Binding LoginMainModel.Login}"/>
-                <TextBlock Text="Пароль" Style="{StaticResource TextBlockStyle}"/>
-                <PasswordBox Name="PasswordBox" Height="24"/>
-                <Button x:Name="AuthorizationButton" Content="Войти" Style="{StaticResource ButtonStyle}" Command ="{Binding AuthorizationCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>
+             
+                <TextBox Name="LoginTextBox" 
+                         Style="{StaticResource TextboxStyle}" 
+                         Text="{Binding LoginMainModel.Login}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding Path=AuthorizationCommand}" Key="Enter"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <TextBlock Text="Пароль" 
+                               Style="{StaticResource TextBlockStyle}"/>
+                <PasswordBox Name="PasswordBox" 
+                             Height="24"/>
+                <Button x:Name="AuthorizationButton" 
+                        Content="Войти" 
+                        Style="{StaticResource ButtonStyle}" Command ="{Binding AuthorizationCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>
+
                 <Button x:Name="RegistrationButton" Content="Регистрация" Style="{StaticResource ButtonStyle }" Command ="{Binding RegistrationCommand}"/>
             </StackPanel>
         </DockPanel>

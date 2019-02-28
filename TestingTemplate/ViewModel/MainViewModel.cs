@@ -25,12 +25,21 @@ namespace TestingTemplate.ViewModel
 
         public MainViewModel()
         {
+
             LoginMainModel = new MainModel();
-            #region Commands
+            
             AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
 
             RegistrationCommand = new RelayCommand(param => Registration());
-            #endregion
+           
+            _login = new MainModel();
+
+			//OnPasswordFinish = new RelayCommand(param => AuthCommand(param));
+
+			AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
+
+			RegistrationCommand = new RelayCommand(param => Registration());
+
         }
 
         public MainModel LoginMainModel { get; set; }
