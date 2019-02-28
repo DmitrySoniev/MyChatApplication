@@ -14,6 +14,8 @@ namespace TestingTemplate.ViewModel
 
         public ICommand RegistrationCommand { get; set; }
 
+        public ICommand FinishPassword { get; set; }
+
         public ICommand AuthorizationCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -25,21 +27,16 @@ namespace TestingTemplate.ViewModel
 
         public MainViewModel()
         {
-
             LoginMainModel = new MainModel();
-            
+            FinishPassword = new RelayCommand(param => AuthCommand(param));
+
             AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
 
             RegistrationCommand = new RelayCommand(param => Registration());
-           
-            _login = new MainModel();
 
-			//OnPasswordFinish = new RelayCommand(param => AuthCommand(param));
+            AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
 
-			AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
-
-			RegistrationCommand = new RelayCommand(param => Registration());
-
+            RegistrationCommand = new RelayCommand(param => Registration());
         }
 
         public MainModel LoginMainModel { get; set; }
@@ -55,15 +52,13 @@ namespace TestingTemplate.ViewModel
 
         private void AuthCommand(object param)
         {
+            #region Zaglushka
+            string login = "dmitry";
+            string passwordCheck = "dmitry";
+            #endregion Zaglushka
             #region CheckingForNullLoginAndPassword
 
-            if (LoginMainModel.Login == null)
-            {
-                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (LoginMainModel.Login == "")
+            if (LoginMainModel.Login == "" || LoginMainModel.Login == null)
             {
                 MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -81,6 +76,21 @@ namespace TestingTemplate.ViewModel
                 return;
             }
             #endregion CheckingForNullLoginAndPassword
+
+            if (LoginMainModel.Login != "" && password != "")
+            {
+                if (LoginMainModel.Login == login && password == passwordCheck)
+                {
+                    MessageBox.Show("Авторизация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Логин или пароль не совпадают, пожалуйста проверьте их и повторите попытку.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
         }
     }
     //public class users : INotifyPropertyChanged

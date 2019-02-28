@@ -18,6 +18,7 @@ namespace TestingTemplate.Model
 			set
 			{
 				_login = value;
+                OnPropertyChanged("LoginMainModel.Login");
 			}
 		}
 

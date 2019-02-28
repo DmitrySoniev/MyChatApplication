@@ -7,7 +7,7 @@ using TestingTemplate.Model;
 
 namespace TestingTemplate.ViewModel
 {
-    public class RegistrationViewModel
+    public class RegistrationViewModel : INotifyPropertyChanged
     {
 
         public ICommand RegistrationCommand { get; set; }
@@ -46,20 +46,13 @@ namespace TestingTemplate.ViewModel
         {
             #region CheckingForNull
 
-            if (RegistrationModel.Login == null)
-            {
-                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (RegistrationModel.Login == "")
+            if (RegistrationModel.Login == "" || RegistrationModel.Login == null)
             {
                 MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             var passwordBox = param as PasswordBox;
-
             if (passwordBox == null)
                 return;
 
@@ -70,25 +63,13 @@ namespace TestingTemplate.ViewModel
                 return;
             }
 
-            if (RegistrationModel.Name == null)
+            if (RegistrationModel.Name == "" || RegistrationModel.Name == null)
             {
                 MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (RegistrationModel.Name == "")
-            {
-                MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (RegistrationModel.Surname == null)
-            {
-                MessageBox.Show("Введите фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (RegistrationModel.Surname == "")
+            if (RegistrationModel.Surname == "" || RegistrationModel.Surname == null)
             {
                 MessageBox.Show("Введите Фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -99,19 +80,20 @@ namespace TestingTemplate.ViewModel
                 MessageBox.Show("Пожалуйста укажите пол.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            #endregion
+            #endregion CheckingForNull
 
             if (RegistrationModel.GenderMan == true)
             {
-                MessageBox.Show("Регистрация прошла успешно!", "Успешно!", MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                 //Должна быть логика
                 MainWindow mainWindow = new MainWindow();
                 CloseAction();
                 mainWindow.ShowDialog();
             }
+
             if (RegistrationModel.GenderWoman == true)
             {
-                MessageBox.Show("Регистрация прошла успешно!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                 //Должна быть логика
                 MainWindow mainWindow = new MainWindow();
                 CloseAction();

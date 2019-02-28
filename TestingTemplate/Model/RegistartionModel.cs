@@ -11,27 +11,10 @@ namespace TestingTemplate.Model
 
         public string Surname { get; set; }
 
-        private bool _genderMan;
-        public bool GenderMan
-        {
-            get { return _genderMan; }
-            set
-            {
-                _genderMan = value;
-                OnPropertyChanged("GenderMan");
-            }
-        }
+        public bool GenderMan { get; set; }
 
-        private bool _genderWoman;
-        public bool GenderWoman
-        {
-            get { return _genderWoman; }
-            set
-            {
-                _genderWoman = value;
-                OnPropertyChanged("GenderWoman");
-            }
-        }
+        public bool GenderWoman { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
