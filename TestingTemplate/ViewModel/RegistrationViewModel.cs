@@ -9,7 +9,6 @@ namespace TestingTemplate.ViewModel
 {
     public class RegistrationViewModel : INotifyPropertyChanged
     {
-
         public ICommand RegistrationCommand { get; set; }
 
         public ICommand BackCommand { get; set; }
@@ -40,7 +39,6 @@ namespace TestingTemplate.ViewModel
 
             mainWindow.ShowDialog();
         }
-
 
         public void Registration(object param)
         {
@@ -80,6 +78,7 @@ namespace TestingTemplate.ViewModel
                 MessageBox.Show("Пожалуйста укажите пол.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
             #endregion CheckingForNull
 
             if (RegistrationModel.GenderMan == true)

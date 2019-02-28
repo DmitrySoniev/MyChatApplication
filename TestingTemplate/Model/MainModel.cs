@@ -8,24 +8,14 @@ using System.Threading.Tasks;
 
 namespace TestingTemplate.Model
 {
-	public class MainModel : INotifyPropertyChanged
-	{
-		private string _login;
+    public class MainModel : INotifyPropertyChanged
+    {
+        public string Login { get; set; }
 
-		public string Login
-		{
-			get { return _login; }
-			set
-			{
-				_login = value;
-                OnPropertyChanged("LoginMainModel.Login");
-			}
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

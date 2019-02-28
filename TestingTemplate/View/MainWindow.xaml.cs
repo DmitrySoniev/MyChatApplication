@@ -18,5 +18,18 @@ namespace TestingTemplate
                 mainViewModel.CloseAction = new Action(Close);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key==Key.Enter)
+            {
+                ((MainViewModel)DataContext).AuthorizationCommand.Execute(PasswordBox);
+            }
+        }
     }
 }

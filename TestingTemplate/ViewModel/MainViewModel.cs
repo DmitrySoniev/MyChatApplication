@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Input;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using TestingTemplate.Model;
-
 
 namespace TestingTemplate.ViewModel
 {
@@ -52,13 +51,17 @@ namespace TestingTemplate.ViewModel
 
         private void AuthCommand(object param)
         {
-            #region Zaglushka
+            #region Заглушка
+
             string login = "dmitry";
             string passwordCheck = "dmitry";
-            #endregion Zaglushka
+
+            #endregion Заглушка
+
             #region CheckingForNullLoginAndPassword
 
-            if (LoginMainModel.Login == "" || LoginMainModel.Login == null)
+        
+            if (string.IsNullOrEmpty(LoginMainModel.Login))
             {
                 MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -75,9 +78,10 @@ namespace TestingTemplate.ViewModel
                 MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
             #endregion CheckingForNullLoginAndPassword
 
-            if (LoginMainModel.Login != "" && password != "")
+            if (!string.IsNullOrEmpty(LoginMainModel.Login) && !string.IsNullOrEmpty(password))
             {
                 if (LoginMainModel.Login == login && password == passwordCheck)
                 {
@@ -90,16 +94,18 @@ namespace TestingTemplate.ViewModel
                     return;
                 }
             }
-
         }
     }
+
     //public class users : INotifyPropertyChanged
     //{
     //    public ObservableCollection<MainModel> MainModels { get; set; }
 
     //    public event PropertyChangedEventHandler PropertyChanged;
     //}
+
     #region TESTMVVM
+
     //static class Test
     //{
     //    public static string GetHello(string a, string b) => a+b;
@@ -115,7 +121,7 @@ namespace TestingTemplate.ViewModel
     //        OnPropertyChanged("Login");
     //    }
     //}
-    //public int Login { get; }=> 
+    //public int Login { get; }=>
 
     //public class MyModel : BindableBase
     //{

@@ -58,20 +58,15 @@
             <StackPanel>
                 <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}"/>
 
-                <TextBox
-                    Style="{StaticResource TextboxStyle}" 
-                    
-                    Text="{Binding LoginMainModel.Login}">
-                    <TextBox.InputBindings>
-                        <KeyBinding Command="{Binding Path=AuthorizationCommand}" Key="Enter"/>
-                    </TextBox.InputBindings>
+                <TextBox Name="LoginTextBox" Style="{StaticResource TextboxStyle}" 
+                         Text="{Binding LoginMainModel.Login}">
                 </TextBox>
                 <TextBlock Text="Пароль" 
-                               Style="{StaticResource TextBlockStyle}"/>
+                           Style="{StaticResource TextBlockStyle}"/>
                 <PasswordBox Name="PasswordBox" 
-                             Height="24">
+                             Height="24" KeyDown="PasswordBox_KeyDown">
                     <!--<PasswordBox.InputBindings>
-                        <KeyBinding Command="{Binding Path=AuthorizationCommand}" Key="End"/>
+                        <KeyBinding Command="{Binding AuthorizationCommand}" Key="Enter"/>
                     </PasswordBox.InputBindings>-->
                 </PasswordBox>
                 <Button Content="Войти" 
@@ -79,9 +74,10 @@
                         Command ="{Binding AuthorizationCommand}"
                         CommandParameter="{Binding ElementName=PasswordBox}"
                         />
-                <Button Content="Регистрация"
-                        Style="{StaticResource ButtonStyle }" 
-                        Command ="{Binding RegistrationCommand}"/>
+                <Button Style="{StaticResource ButtonStyle }" 
+                        Command ="{Binding RegistrationCommand}">
+                        Регистрация
+                </Button>
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="50">
