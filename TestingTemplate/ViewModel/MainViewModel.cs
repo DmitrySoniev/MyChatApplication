@@ -7,186 +7,200 @@ using TestingTemplate.Model;
 
 namespace TestingTemplate.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
-    {
-        public Action CloseAction { get; set; }
+	public class MainViewModel : INotifyPropertyChanged
+	{
+		#region Commands
 
-        public ICommand RegistrationCommand { get; set; }
+		public Action CloseAction { get; set; }
 
-        public ICommand FinishPassword { get; set; }
+		public ICommand RegistrationCommand { get; set; }
 
-        public ICommand AuthorizationCommand { get; set; }
+		public ICommand AuthorizationCommand { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public ICommand SendMessageCommand { get; set; }
 
-        protected virtual void OnPropertyChanged(string PropertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-        }
+		public ICommand FindUserCommand { get; set; }
 
-        public MainViewModel()
-        {
-            LoginMainModel = new MainModel();
-            FinishPassword = new RelayCommand(param => AuthCommand(param));
+		#endregion Commands
 
-            AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
+		public event PropertyChangedEventHandler PropertyChanged;
 
-            RegistrationCommand = new RelayCommand(param => Registration());
+		protected virtual void OnPropertyChanged(string PropertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+		}
 
-            AuthorizationCommand = new RelayCommand(param => AuthCommand(param));
+		public MainViewModel()
+		{
+			LoginMainModel = new MainModel();
 
-            RegistrationCommand = new RelayCommand(param => Registration());
-        }
+			AuthorizationCommand = new RelayCommand(AuthCommand);
 
-        public MainModel LoginMainModel { get; set; }
+			RegistrationCommand = new RelayCommand(param => Registration());
 
-        private void Registration()
-        {
-            Registration registrationWindow = new Registration();
+			SendMessageCommand = new RelayCommand(param => SendCommand());
 
-            CloseAction();
+			FindUserCommand = new RelayCommand(param => FindUser());
+		}
 
-            registrationWindow.ShowDialog();
-        }
+		public MainModel LoginMainModel { get; set; }
 
-        private void AuthCommand(object param)
-        {
-            #region Заглушка
+		private void Registration()
+		{
+			Registration registrationWindow = new Registration();
 
-            string login = "dmitry";
-            string passwordCheck = "dmitry";
+			CloseAction();
 
-            #endregion Заглушка
+			registrationWindow.ShowDialog();
+		}
 
-            #region CheckingForNullLoginAndPassword
+		private void FindUser()
+		{
+			if (string.IsNullOrEmpty(LoginMainModel.FindUser))
+			{
+				MessageBox.Show("FindUserTextboxTest");
+			}
+		}
 
-        
-            if (string.IsNullOrEmpty(LoginMainModel.Login))
-            {
-                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+		private void SendCommand()
+		{
+			if (string.IsNullOrEmpty(LoginMainModel.SendMessage))
+			{
+				MessageBox.Show("SendMessageTextBoxTest");
+				return;
+			}
+		}
 
-            var passwordBox = param as PasswordBox;
+		private void AuthCommand(object param)
+		{
+			#region Заглушка
 
-            if (passwordBox == null)
-                return;
+			string login = "dmitry";
+			string passwordCheck = "dmitry";
 
-            var password = passwordBox.Password;
-            if (password == "")
-            {
-                MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+			#endregion Заглушка
 
-            #endregion CheckingForNullLoginAndPassword
+			#region CheckingForNullLoginAndPassword
 
-            if (!string.IsNullOrEmpty(LoginMainModel.Login) && !string.IsNullOrEmpty(password))
-            {
-                if (LoginMainModel.Login == login && password == passwordCheck)
-                {
-                    MessageBox.Show("Авторизация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Логин или пароль не совпадают, пожалуйста проверьте их и повторите попытку.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-            }
-        }
-    }
+			if (string.IsNullOrEmpty(LoginMainModel.Login))
+			{
+				MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
-    //public class users : INotifyPropertyChanged
-    //{
-    //    public ObservableCollection<MainModel> MainModels { get; set; }
+			var passwordBox = param as PasswordBox;
 
-    //    public event PropertyChangedEventHandler PropertyChanged;
-    //}
+			if (passwordBox == null)
+				return;
 
-    #region TESTMVVM
+			var password = passwordBox.Password;
+			if (password == "")
+			{
+				MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
-    //static class Test
-    //{
-    //    public static string GetHello(string a, string b) => a+b;
-    //}
+			#endregion CheckingForNullLoginAndPassword
 
-    //private string _login;
-    //public string Login
-    //{
-    //    get { return _login; }
-    //    set
-    //    {
-    //        _login = value;
-    //        OnPropertyChanged("Login");
-    //    }
-    //}
-    //public int Login { get; }=>
+			if (!string.IsNullOrEmpty(LoginMainModel.Login) && !string.IsNullOrEmpty(password))
+			{
+				if (LoginMainModel.Login == login && password == passwordCheck)
+				{
+					MessageBox.Show("Авторизация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+					return;
+				}
+				else
+				{
+					MessageBox.Show("Логин или пароль не совпадают, пожалуйста проверьте их и повторите попытку.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+					return;
+				}
+			}
+		}
+	}
 
-    //public class MyModel : BindableBase
-    //{
-    //    private readonly ObservableCollection<string> _myvalues = new ObservableCollection<string>();
+	#region TESTMVVM
 
-    //    public readonly ReadOnlyObservableCollection<string> MyPublicValues;
+	//static class Test
+	//{
+	//    public static string GetHello(string a, string b) => a+b;
+	//}
 
-    //    public MyModel()
-    //    {
-    //        MyPublicValues = new ReadOnlyObservableCollection<string>(_myvalues);
-    //    }
-    //}
-    //public class MainViewModel : INotifyPropertyChanged
-    //{
-    //    public event PropertyChangedEventHandler PropertyChanged;
-    //    public void OnPropertyChanged([CallerMemberName] string prop = "")
-    //    {
-    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-    //    }
-    //}
-    //class DelegateCommand : ICommand
-    //{
-    //    private Action<Object> execute;
-    //    private Func<object, bool> canExecute;
-    //    public event EventHandler CanExecuteChanged
-    //    {
-    //        add { CommandManager.RequerySuggested += value; }
-    //        remove { CommandManager.RequerySuggested -= value; }
-    //    }
+	//private string _login;
+	//public string Login
+	//{
+	//    get { return _login; }
+	//    set
+	//    {
+	//        _login = value;
+	//        OnPropertyChanged("Login");
+	//    }
+	//}
+	//public int Login { get; }=>
 
-    //    public DelegateCommand(Action<object> execute, Func<object, bool> canExecute = null)
-    //    {
-    //        this.execute = execute;
-    //        this.canExecute = canExecute;
-    //    }
+	//public class MyModel : BindableBase
+	//{
+	//    private readonly ObservableCollection<string> _myvalues = new ObservableCollection<string>();
 
-    //public bool CanExecute(object parameter)
-    //{
-    //    return this.canExecute == null || this.canExecute(parameter);
-    //}
+	//    public readonly ReadOnlyObservableCollection<string> MyPublicValues;
 
-    //public void Execute(object parameter)
-    //{
-    //    this.execute(parameter);
-    //}
-    //}
+	//    public MyModel()
+	//    {
+	//        MyPublicValues = new ReadOnlyObservableCollection<string>(_myvalues);
+	//    }
+	//}
+	//public class MainViewModel : INotifyPropertyChanged
+	//{
+	//    public event PropertyChangedEventHandler PropertyChanged;
+	//    public void OnPropertyChanged([CallerMemberName] string prop = "")
+	//    {
+	//        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+	//    }
+	//}
+	//class DelegateCommand : ICommand
+	//{
+	//    private Action<Object> execute;
+	//    private Func<object, bool> canExecute;
+	//    public event EventHandler CanExecuteChanged
+	//    {
+	//        add { CommandManager.RequerySuggested += value; }
+	//        remove { CommandManager.RequerySuggested -= value; }
+	//    }
 
-    //public ICommand Click
-    //{
-    //    get { return new DelegateCommand((obj) => { }); }
-    //}
+	//    public DelegateCommand(Action<object> execute, Func<object, bool> canExecute = null)
+	//    {
+	//        this.execute = execute;
+	//        this.canExecute = canExecute;
+	//    }
 
-    //public class MyViewModel
-    //{
-    //    private ICommand _authorizationCommand;
+	//public bool CanExecute(object parameter)
+	//{
+	//    return this.canExecute == null || this.canExecute(parameter);
+	//}
 
-    //    public ICommand AuthorizationCommand
-    //    {
-    //        get
-    //        {
-    //            return _authorizationCommand
-    //                   ?? (_authorizationCommand = new ActionCommand(() => { MessageBox.Show("test"); }));
-    //        }
-    //    }
-    //}
+	//public void Execute(object parameter)
+	//{
+	//    this.execute(parameter);
+	//}
+	//}
 
-    #endregion TESTMVVM
+	//public ICommand Click
+	//{
+	//    get { return new DelegateCommand((obj) => { }); }
+	//}
+
+	//public class MyViewModel
+	//{
+	//    private ICommand _authorizationCommand;
+
+	//    public ICommand AuthorizationCommand
+	//    {
+	//        get
+	//        {
+	//            return _authorizationCommand
+	//                   ?? (_authorizationCommand = new ActionCommand(() => { MessageBox.Show("test"); }));
+	//        }
+	//    }
+	//}
+
+	#endregion TESTMVVM
 }

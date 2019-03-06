@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,97 +6,95 @@ using TestingTemplate.Model;
 
 namespace TestingTemplate.ViewModel
 {
-    public class RegistrationViewModel : INotifyPropertyChanged
-    {
-        public ICommand RegistrationCommand { get; set; }
+	public class RegistrationViewModel
+	{
+		public ICommand RegistrationCommand { get; set; }
 
-        public ICommand BackCommand { get; set; }
+		public ICommand BackCommand { get; set; }
 
-        public Action CloseAction { get; set; }
+		public Action CloseAction { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public RegistrationViewModel()
+		{
+			RegistrationModel = new RegistrationModel();
 
-        protected virtual void OnPropertyChanged(string PropertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-        }
+			#region Commands
 
-        public RegistrationViewModel()
-        {
-            RegistrationModel = new RegistrationModel();
-            RegistrationCommand = new RelayCommand(param => Registration(param));
-            BackCommand = new RelayCommand(param => Back());
-        }
+			RegistrationCommand = new RelayCommand(param => Registration(param));
+			BackCommand = new RelayCommand(param => Back());
 
-        public RegistrationModel RegistrationModel { get; set; }
+			#endregion Commands
+		}
 
-        public void Back()
-        {
-            MainWindow mainWindow = new MainWindow();
+		public RegistrationModel RegistrationModel { get; set; }
 
-            CloseAction();
+		public void Back()
+		{
+			MainWindow mainWindow = new MainWindow();
 
-            mainWindow.ShowDialog();
-        }
+			CloseAction();
 
-        public void Registration(object param)
-        {
-            #region CheckingForNull
+			mainWindow.ShowDialog();
+		}
 
-            if (RegistrationModel.Login == "" || RegistrationModel.Login == null)
-            {
-                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+		public void Registration(object param)
+		{
+			#region CheckingForNull
 
-            var passwordBox = param as PasswordBox;
-            if (passwordBox == null)
-                return;
+			if (string.IsNullOrEmpty(RegistrationModel.Login))
+			{
+				MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
-            var password = passwordBox.Password;
-            if (password == "")
-            {
-                MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+			var passwordBox = param as PasswordBox;
+			if (passwordBox == null)
+				return;
 
-            if (RegistrationModel.Name == "" || RegistrationModel.Name == null)
-            {
-                MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+			var password = passwordBox.Password;
+			if (password == "")
+			{
+				MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
-            if (RegistrationModel.Surname == "" || RegistrationModel.Surname == null)
-            {
-                MessageBox.Show("Введите Фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+			if (string.IsNullOrEmpty(RegistrationModel.Name))
+			{
+				MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
-            if (RegistrationModel.GenderMan == false && RegistrationModel.GenderWoman == false)
-            {
-                MessageBox.Show("Пожалуйста укажите пол.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+			if (string.IsNullOrEmpty(RegistrationModel.Surname))
+			{
+				MessageBox.Show("Введите Фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
-            #endregion CheckingForNull
+			if (RegistrationModel.GenderMan == false && RegistrationModel.GenderWoman == false)
+			{
+				MessageBox.Show("Пожалуйста укажите пол.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
-            if (RegistrationModel.GenderMan == true)
-            {
-                MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                //Должна быть логика
-                MainWindow mainWindow = new MainWindow();
-                CloseAction();
-                mainWindow.ShowDialog();
-            }
+			#endregion CheckingForNull
 
-            if (RegistrationModel.GenderWoman == true)
-            {
-                MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                //Должна быть логика
-                MainWindow mainWindow = new MainWindow();
-                CloseAction();
-                mainWindow.ShowDialog();
-            }
-        }
-    }
+			if (RegistrationModel.GenderMan)
+			{
+				MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+				//Должна быть логика
+				MainWindow mainWindow = new MainWindow();
+				CloseAction();
+				mainWindow.ShowDialog();
+			}
+
+			if (RegistrationModel.GenderWoman)
+			{
+				MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+				//Должна быть логика
+				MainWindow mainWindow = new MainWindow();
+				CloseAction();
+				mainWindow.ShowDialog();
+			}
+		}
+	}
 }

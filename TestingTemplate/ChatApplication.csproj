@@ -161,6 +161,7 @@
     <Compile Include="GenderConverter.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\RegistartionModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="RegisterData.cs" />
@@ -216,7 +217,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Backgrounds\BackgroundForRegistration.jpg" />
