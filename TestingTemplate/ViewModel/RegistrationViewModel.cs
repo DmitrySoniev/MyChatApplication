@@ -17,13 +17,8 @@ namespace TestingTemplate.ViewModel
 		public RegistrationViewModel()
 		{
 			RegistrationModel = new RegistrationModel();
-
-			#region Commands
-
 			RegistrationCommand = new RelayCommand(param => Registration(param));
 			BackCommand = new RelayCommand(param => Back());
-
-			#endregion Commands
 		}
 
 		public RegistrationModel RegistrationModel { get; set; }

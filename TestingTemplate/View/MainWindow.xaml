@@ -1,4 +1,4 @@
-﻿<Window x:Name="mainWindowChat" x:Class="TestingTemplate.MainWindow"
+﻿<Window x:Class="TestingTemplate.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -64,9 +64,6 @@
                            Style="{StaticResource TextBlockStyle}" />
                 <PasswordBox Name="PasswordBox"
                              Height="24" KeyDown="PasswordBox_KeyDown">
-                    <!--<PasswordBox.InputBindings>
-                        <KeyBinding Command="{Binding AuthorizationCommand}" Key="Enter" />
-                    </PasswordBox.InputBindings>-->
                 </PasswordBox>
                 <Button Content="Войти"
                         Style="{StaticResource ButtonStyle}"

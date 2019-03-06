@@ -7,10 +7,8 @@ using TestingTemplate.Model;
 
 namespace TestingTemplate.ViewModel
 {
-	public class MainViewModel : INotifyPropertyChanged
+	public class MainViewModel
 	{
-		#region Commands
-
 		public Action CloseAction { get; set; }
 
 		public ICommand RegistrationCommand { get; set; }
@@ -20,15 +18,6 @@ namespace TestingTemplate.ViewModel
 		public ICommand SendMessageCommand { get; set; }
 
 		public ICommand FindUserCommand { get; set; }
-
-		#endregion Commands
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected virtual void OnPropertyChanged(string PropertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-		}
 
 		public MainViewModel()
 		{
