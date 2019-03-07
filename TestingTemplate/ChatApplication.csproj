@@ -158,7 +158,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GenderConverter.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\RegistartionModel.cs" />
     <Compile Include="Properties\Annotations.cs" />

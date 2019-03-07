@@ -10,7 +10,7 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\soniev\source\repos\TestingTemplate\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg" />
+        <ImageBrush ImageSource="C:\Users\Дмитрий\Source\Repos\DmitrySoniev\MyChatApplication\TestingTemplate\Backgrounds\BackgroundForMainWindow.jpg" />
     </Window.Background>
     <Window.Resources>
 
