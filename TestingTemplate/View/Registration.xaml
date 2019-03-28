@@ -10,7 +10,7 @@
         <VM:RegistrationViewModel />
     </Window.DataContext>
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Дмитрий\Source\Repos\DmitrySoniev\MyChatApplication\TestingTemplate\Backgrounds\BackgroundForRegistration.jpg" />
+        <ImageBrush ImageSource="C:\Users\user\Source\Repos\MyChatApplication\TestingTemplate\Backgrounds\BackgroundForRegistration.jpg" />
     </Window.Background>
     <Window.Resources>
         <Style x:Key="TextBoxStyle" TargetType="TextBox">
