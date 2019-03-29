@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TestingTemplate.ViewModel"
         xmlns:local2="clr-namespace:TestingTemplate"
         mc:Ignorable="d"
-        Title="Чат" Height="450" Width="800" ResizeMode="CanResize" WindowStyle="None">
+        Title="Чат" Height="450" Width="800" ResizeMode="CanResize">
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
