@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -27,7 +26,9 @@ namespace TestingTemplate.ViewModel
 
             ClearMessagesCommand = new RelayCommand(param => ClearMessages());
 
-            Messages = new ObservableCollection<string>();
+           
+
+                Messages = new ObservableCollection<string>();
 
             Users = new ObservableCollection<string>();
 
@@ -41,6 +42,8 @@ namespace TestingTemplate.ViewModel
                    Messages.Add(sender + " " + message)));
             };
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Action CloseAction { get; set; }
 
@@ -59,8 +62,6 @@ namespace TestingTemplate.ViewModel
         public string Message { get; set; }
         public ObservableCollection<string> Messages { get; set; }
         public ObservableCollection<string> Users { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void AuthCommand(object param)
         {
@@ -88,6 +89,17 @@ namespace TestingTemplate.ViewModel
 
             if (!string.IsNullOrEmpty(LoginMainModel.Login) && !string.IsNullOrEmpty(password))
             {
+                if (LoginMainModel.Login.Length > 15)
+                {
+                    MessageBox.Show("Логин должен не превышать 15 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+                if (password.Length > 20)
+                {
+                    MessageBox.Show("Пароль не должен превышать 20 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+
                 try
                 {
                     _client.Login(LoginMainModel.Login, password);
@@ -138,7 +150,11 @@ namespace TestingTemplate.ViewModel
                 MessageBox.Show("Введите сообщение!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
-
+            if (Message.Length > 500)
+            {
+                MessageBox.Show("Сообщение не должно превышать 500 символов", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
             _client.SendMessage(CurrentUser, Message);
             Message = String.Empty;
         }

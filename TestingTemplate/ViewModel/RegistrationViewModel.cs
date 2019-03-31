@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -6,14 +7,8 @@ using TestingTemplate.Model;
 
 namespace TestingTemplate.ViewModel
 {
-    public class RegistrationViewModel
+    public class RegistrationViewModel : INotifyPropertyChanged
     {
-        public ICommand RegistrationCommand { get; set; }
-
-        public ICommand BackCommand { get; set; }
-
-        public Action CloseAction { get; set; }
-
         public RegistrationViewModel()
         {
             RegistrationModel = new RegistrationModel();
@@ -21,6 +16,11 @@ namespace TestingTemplate.ViewModel
             BackCommand = new RelayCommand(param => Back());
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand BackCommand { get; set; }
+        public Action CloseAction { get; set; }
+        public ICommand RegistrationCommand { get; set; }
         public RegistrationModel RegistrationModel { get; set; }
 
         public void Back()
@@ -34,7 +34,7 @@ namespace TestingTemplate.ViewModel
 
         public void Registration(object param)
         {
-            #region CheckingForNull
+            #region CheckingValuesForNull
 
             if (string.IsNullOrEmpty(RegistrationModel.Login))
             {
@@ -71,7 +71,35 @@ namespace TestingTemplate.ViewModel
                 return;
             }
 
-            #endregion CheckingForNull
+            #endregion CheckingValuesForNull
+
+            #region ValuesLength
+
+            if (RegistrationModel.Login.Length > 15)
+            {
+                MessageBox.Show("Логин не должен превышать 15 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            if (password.Length > 20)
+            {
+                MessageBox.Show("Пароль не должен превышать 20 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            if (RegistrationModel.Name.Length > 15)
+            {
+                MessageBox.Show("Имя не должно превышать 15 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            if (RegistrationModel.Surname.Length > 25)
+            {
+                MessageBox.Show("Фамилия не должна превышать 25 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            #endregion ValuesLength
 
             if (RegistrationModel.GenderMan)
             {
