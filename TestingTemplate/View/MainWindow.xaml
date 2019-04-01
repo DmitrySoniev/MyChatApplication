@@ -39,7 +39,7 @@
             <Setter Property="Foreground" Value="Black" />
         </Style>
 
-        <Style TargetType="Button"  x:Key="SendB">
+        <Style TargetType="Button"  x:Key="SendButtonStyle">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -118,7 +118,7 @@
                         <Button Style="{StaticResource ButtonStyle}"
                                 Command ="{Binding ClearMessagesCommand}" Content="Очистить" DockPanel.Dock="Bottom" />
                     </DockPanel>-->
-                    <Button Name="SendButton" Style="{StaticResource SendB}" BorderBrush="#FF616061" BorderThickness="3" Width="70" DockPanel.Dock="Right"  Margin="0,-3,-3,-3"   Command="{Binding SendMessageCommand}">
+                    <Button Name="SendButton" Style="{StaticResource SendButtonStyle}" BorderBrush="#FF616061" BorderThickness="3" Width="70" DockPanel.Dock="Right"  Margin="0,-3,-3,-3"   Command="{Binding SendMessageCommand}">
                     </Button>
 
                     <TextBox  BorderBrush="#00000000" FontSize="17" Padding="5" Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown">

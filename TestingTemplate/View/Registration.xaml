@@ -9,9 +9,7 @@
     <Window.DataContext>
         <VM:RegistrationViewModel />
     </Window.DataContext>
-    <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Дмитрий\Source\Repos\DmitrySoniev\MyChatApplication\TestingTemplate\Backgrounds\BackgroundForRegistration.jpg" />
-    </Window.Background>
+
     <Window.Resources>
         <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="FontFamily" Value="Helvetica" />
@@ -29,10 +27,31 @@
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
         </Style>
-        <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="FontFamily" Value="Helvetica" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontStretch" Value="Expanded" />
+
+        <Style x:Key="RegistrationButtonStyle" TargetType="Button">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,10,10,10">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="15">Регистрация</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BackButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,10,10,10">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="15">Вернуться</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
@@ -52,8 +71,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="13,182,0,0" TextWrapping="Wrap" Text="Пол" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}" />
         <RadioButton  Content="Мужской" IsChecked="{Binding RegistrationModel.GenderMan, Mode=TwoWay}" HorizontalAlignment="Left" Margin="116,186,0,0" VerticalAlignment="Top" Style="{StaticResource RadioButtonStyle}" />
         <RadioButton  Content="Женский" IsChecked="{Binding RegistrationModel.GenderWoman}" HorizontalAlignment="Left" Margin="224,186,0,0" VerticalAlignment="Top" Style="{StaticResource  RadioButtonStyle}" />
-        <Button Name="RegistrationButton" Content="Регистрация"  Command="{Binding RegistrationCommand}" CommandParameter="{Binding ElementName=PasswordBox}" HorizontalAlignment="Left" Margin="181,224,0,0" VerticalAlignment="Top" Width="108" RenderTransformOrigin="-0.4,1.15" Style="{StaticResource ButtonStyle}" Height="31" />
-        <Button Name="BackButton" Content="Назад" HorizontalAlignment="Left" Margin="36,224,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource ButtonStyle}" Height="30" Command="{Binding BackCommand}" />
+        <Button Name="RegistrationButton" Command="{Binding RegistrationCommand}" CommandParameter="{Binding ElementName=PasswordBox}" HorizontalAlignment="Left" Margin="181,224,0,0" VerticalAlignment="Top" Width="108" RenderTransformOrigin="-0.4,1.15" Style="{StaticResource RegistrationButtonStyle}" Height="31" />
+        <Button Name="BackButton" HorizontalAlignment="Left" Margin="36,224,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource BackButtonStyle}" Height="30" Command="{Binding BackCommand}" />
         <PasswordBox Name ="PasswordBox" HorizontalAlignment="Left" Margin="116,45,0,0" VerticalAlignment="Top" Width="185" Height="23" Style="{StaticResource PasswordBoxStyle}" />
     </Grid>
 </Window>
