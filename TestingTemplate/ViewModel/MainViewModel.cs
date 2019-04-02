@@ -1,195 +1,162 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TestingTemplate.Model;
 
 namespace TestingTemplate.ViewModel
 {
-	public class MainViewModel
-	{
-		public Action CloseAction { get; set; }
+    public class MainViewModel : INotifyPropertyChanged
+    {
+        public const string ServerAddress = "http://192.168.1.67:50338";
+        private Client _client;
 
-		public ICommand RegistrationCommand { get; set; }
+        public MainViewModel()
+        {
+            LoginMainModel = new MainModel();
 
-		public ICommand AuthorizationCommand { get; set; }
+            AuthorizationCommand = new RelayCommand(AuthCommand);
 
-		public ICommand SendMessageCommand { get; set; }
+            RegistrationCommand = new RelayCommand(param => Registration());
 
-		public ICommand FindUserCommand { get; set; }
+            SendMessageCommand = new RelayCommand(obj => SendCommand());
 
-		public MainViewModel()
-		{
-			LoginMainModel = new MainModel();
+            ClearMessagesCommand = new RelayCommand(param => ClearMessages());
 
-			AuthorizationCommand = new RelayCommand(AuthCommand);
+           
 
-			RegistrationCommand = new RelayCommand(param => Registration());
+                Messages = new ObservableCollection<string>();
 
-			SendMessageCommand = new RelayCommand(param => SendCommand());
+            Users = new ObservableCollection<string>();
 
-			FindUserCommand = new RelayCommand(param => FindUser());
-		}
+            _client = new Client(ServerAddress);
+            _client.ReceiveMessage = (sender, message) =>
+            {
+                Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background,
+                    new Action(() =>
 
-		public MainModel LoginMainModel { get; set; }
+                   Messages.Add(sender + " " + message)));
+            };
+        }
 
-		private void Registration()
-		{
-			Registration registrationWindow = new Registration();
+        public event PropertyChangedEventHandler PropertyChanged;
 
-			CloseAction();
+        public Action CloseAction { get; set; }
 
-			registrationWindow.ShowDialog();
-		}
+        #region Commands
 
-		private void FindUser()
-		{
-			if (string.IsNullOrEmpty(LoginMainModel.FindUser))
-			{
-				MessageBox.Show("FindUserTextboxTest");
-			}
-		}
+        public ICommand AuthorizationCommand { get; set; }
+        public ICommand ClearMessagesCommand { get; set; }
+        public ICommand FindUserCommand { get; set; }
+        public ICommand RegistrationCommand { get; set; }
+        public ICommand SendMessageCommand { get; set; }
 
-		private void SendCommand()
-		{
-			if (string.IsNullOrEmpty(LoginMainModel.SendMessage))
-			{
-				MessageBox.Show("SendMessageTextBoxTest");
-				return;
-			}
-		}
+        #endregion Commands
 
-		private void AuthCommand(object param)
-		{
-			#region Заглушка
+        public string CurrentUser { get; set; }
+        public MainModel LoginMainModel { get; set; }
+        public string Message { get; set; }
+        public ObservableCollection<string> Messages { get; set; }
+        public ObservableCollection<string> Users { get; set; }
 
-			string login = "dmitry";
-			string passwordCheck = "dmitry";
+        private void AuthCommand(object param)
+        {
+            #region CheckingForNullLoginAndPassword
 
-			#endregion Заглушка
+            if (string.IsNullOrEmpty(LoginMainModel.Login))
+            {
+                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-			#region CheckingForNullLoginAndPassword
+            var passwordBox = param as PasswordBox;
+            if (passwordBox == null)
+                return;
 
-			if (string.IsNullOrEmpty(LoginMainModel.Login))
-			{
-				MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+            var password = passwordBox.Password;
 
-			var passwordBox = param as PasswordBox;
+            if (password == "")
+            {
+                MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-			if (passwordBox == null)
-				return;
+            #endregion CheckingForNullLoginAndPassword
 
-			var password = passwordBox.Password;
-			if (password == "")
-			{
-				MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+            if (!string.IsNullOrEmpty(LoginMainModel.Login) && !string.IsNullOrEmpty(password))
+            {
+                if (LoginMainModel.Login.Length > 15)
+                {
+                    MessageBox.Show("Логин должен не превышать 15 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+                if (password.Length > 20)
+                {
+                    MessageBox.Show("Пароль не должен превышать 20 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
 
-			#endregion CheckingForNullLoginAndPassword
+                try
+                {
+                    _client.Login(LoginMainModel.Login, password);
 
-			if (!string.IsNullOrEmpty(LoginMainModel.Login) && !string.IsNullOrEmpty(password))
-			{
-				if (LoginMainModel.Login == login && password == passwordCheck)
-				{
-					MessageBox.Show("Авторизация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-					return;
-				}
-				else
-				{
-					MessageBox.Show("Логин или пароль не совпадают, пожалуйста проверьте их и повторите попытку.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-					return;
-				}
-			}
-		}
-	}
+                    _client.StartChat();
 
-	#region TESTMVVM
+                    LoginMainModel.Login = String.Empty;
 
-	//static class Test
-	//{
-	//    public static string GetHello(string a, string b) => a+b;
-	//}
+                    passwordBox.Password = String.Empty;
+                    var users = _client.GetAllUsers();
+                    _client.GetAllUsers();
+                    foreach (var item in users)
+                    {
+                        Users.Add(item);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
 
-	//private string _login;
-	//public string Login
-	//{
-	//    get { return _login; }
-	//    set
-	//    {
-	//        _login = value;
-	//        OnPropertyChanged("Login");
-	//    }
-	//}
-	//public int Login { get; }=>
+        private void ClearMessages()
+        {
+            Messages.Clear();
+        }
 
-	//public class MyModel : BindableBase
-	//{
-	//    private readonly ObservableCollection<string> _myvalues = new ObservableCollection<string>();
+        private void Registration()
+        {
+            Registration registrationWindow = new Registration();
 
-	//    public readonly ReadOnlyObservableCollection<string> MyPublicValues;
+            CloseAction();
 
-	//    public MyModel()
-	//    {
-	//        MyPublicValues = new ReadOnlyObservableCollection<string>(_myvalues);
-	//    }
-	//}
-	//public class MainViewModel : INotifyPropertyChanged
-	//{
-	//    public event PropertyChangedEventHandler PropertyChanged;
-	//    public void OnPropertyChanged([CallerMemberName] string prop = "")
-	//    {
-	//        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-	//    }
-	//}
-	//class DelegateCommand : ICommand
-	//{
-	//    private Action<Object> execute;
-	//    private Func<object, bool> canExecute;
-	//    public event EventHandler CanExecuteChanged
-	//    {
-	//        add { CommandManager.RequerySuggested += value; }
-	//        remove { CommandManager.RequerySuggested -= value; }
-	//    }
+            registrationWindow.ShowDialog();
+        }
 
-	//    public DelegateCommand(Action<object> execute, Func<object, bool> canExecute = null)
-	//    {
-	//        this.execute = execute;
-	//        this.canExecute = canExecute;
-	//    }
+        private void SendCommand()
+        {
+            if (string.IsNullOrEmpty(CurrentUser))
+            {
+                MessageBox.Show("Пользователь не выбран!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
 
-	//public bool CanExecute(object parameter)
-	//{
-	//    return this.canExecute == null || this.canExecute(parameter);
-	//}
-
-	//public void Execute(object parameter)
-	//{
-	//    this.execute(parameter);
-	//}
-	//}
-
-	//public ICommand Click
-	//{
-	//    get { return new DelegateCommand((obj) => { }); }
-	//}
-
-	//public class MyViewModel
-	//{
-	//    private ICommand _authorizationCommand;
-
-	//    public ICommand AuthorizationCommand
-	//    {
-	//        get
-	//        {
-	//            return _authorizationCommand
-	//                   ?? (_authorizationCommand = new ActionCommand(() => { MessageBox.Show("test"); }));
-	//        }
-	//    }
-	//}
-
-	#endregion TESTMVVM
+            if (string.IsNullOrEmpty(Message))
+            {
+                MessageBox.Show("Введите сообщение!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+            if (Message.Length > 500)
+            {
+                MessageBox.Show("Сообщение не должно превышать 500 символов", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+            _client.SendMessage(CurrentUser, Message);
+            Message = String.Empty;
+        }
+    }
 }
