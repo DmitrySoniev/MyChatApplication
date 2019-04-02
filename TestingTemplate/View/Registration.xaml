@@ -34,7 +34,7 @@
 
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,10,10,10">
+                        <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,10,10,10" Background="LightGray">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="15">Регистрация</TextBlock>
                         </Border>
                     </ControlTemplate>
@@ -46,7 +46,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,10,10,10">
+                        <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,10,10,10" Background="LightGray">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="15">Вернуться</TextBlock>
                         </Border>
                     </ControlTemplate>
