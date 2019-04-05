@@ -10,7 +10,10 @@ namespace TestingTemplate.Model
 
         public string PathToServer { get; set; }
 
-        public string HelloUser { get; set; }
+        /// <summary>
+        /// Отображение логина пользователя
+        /// </summary>
+        public string UserLogin { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

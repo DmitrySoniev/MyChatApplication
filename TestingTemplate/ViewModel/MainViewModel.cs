@@ -23,7 +23,7 @@ namespace TestingTemplate.ViewModel
 
             SendMessageCommand = new RelayCommand(obj => SendCommand());
 
-            ClearMessagesCommand = new RelayCommand(param => ClearMessages());
+            //ClearMessagesCommand = new RelayCommand(param => ClearMessages());
 
             Messages = new ObservableCollection<string>();
 
@@ -76,6 +76,8 @@ namespace TestingTemplate.ViewModel
 
             #endregion CheckingForValues
 
+            #region ConnectToServer
+
             string ServerAddress = "http://" + MainModel.PathToServer;
 
             _client = new Client(ServerAddress);
@@ -89,6 +91,8 @@ namespace TestingTemplate.ViewModel
                    Messages.Add(sender + " " + message)));
             };
             SaveChanges();
+
+            #endregion ConnectToServer
 
             if (!string.IsNullOrEmpty(MainModel.Login) && !string.IsNullOrEmpty(password))
             {
@@ -109,7 +113,7 @@ namespace TestingTemplate.ViewModel
 
                     _client.StartChat();
 
-                    MainModel.HelloUser = "Здраствуйте:" + "\n" + MainModel.Login;
+                    MainModel.UserLogin = "Здравствуйте:" + "\n" + MainModel.Login;
 
                     MainModel.Login = String.Empty;
 
@@ -130,10 +134,10 @@ namespace TestingTemplate.ViewModel
             }
         }
 
-        private void ClearMessages()
-        {
-            Messages.Clear();
-        }
+        //private void ClearMessages()
+        //{
+        //    Messages.Clear();
+        //}
 
         private void LoadChanges()
         {
@@ -168,7 +172,7 @@ namespace TestingTemplate.ViewModel
         #region Commands
 
         public ICommand AuthorizationCommand { get; set; }
-        public ICommand ClearMessagesCommand { get; set; }
+        //public ICommand ClearMessagesCommand { get; set; }
 
         public ICommand RegistrationCommand { get; set; }
         public ICommand SendMessageCommand { get; set; }

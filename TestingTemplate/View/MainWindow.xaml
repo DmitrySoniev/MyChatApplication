@@ -86,7 +86,7 @@
 
         <DockPanel DockPanel.Dock="Left" Width="180" Visibility="Visible" Background="#FF3F0E40">
             <StackPanel>
-                <TextBlock Text="{Binding Path=MainModel.HelloUser}" TextWrapping="Wrap" FontSize="18" FontFamily="Helvetica" Foreground="White" FontStyle="Italic"></TextBlock>
+                <TextBlock Text="{Binding Path=MainModel.UserLogin}" TextWrapping="Wrap" FontSize="18" FontFamily="Helvetica" Foreground="White" FontStyle="Italic"></TextBlock>
                 <Border BorderThickness="1" Background="White">
                     <TextBlock Foreground="White"  Background="#FF3F0E40" FontSize="18" FontWeight="Bold" FontFamily="Helvetica"  DockPanel.Dock="Top" Text="Пользователи" Style="{StaticResource TextBlockStyle}" Padding="8" />
                 </Border>
@@ -124,7 +124,7 @@
                 <TextBox Text="{Binding MainModel.PathToServer}">
                 </TextBox>
 
-                    <Button Content="Войти"
+                <Button Content="Войти"
                         Style="{StaticResource ButtonStyle}"
                         Command ="{Binding AuthorizationCommand}"
                         CommandParameter="{Binding ElementName=PasswordBox}" />
