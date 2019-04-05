@@ -11,12 +11,11 @@ namespace TestingTemplate.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public const string ServerAddress = "http://192.168.1.67:50338";
         private Client _client;
 
         public MainViewModel()
         {
-            LoginMainModel = new MainModel();
+            MainModel = new MainModel();
 
             AuthorizationCommand = new RelayCommand(AuthCommand);
 
@@ -26,48 +25,32 @@ namespace TestingTemplate.ViewModel
 
             ClearMessagesCommand = new RelayCommand(param => ClearMessages());
 
-           
-
-                Messages = new ObservableCollection<string>();
+            Messages = new ObservableCollection<string>();
 
             Users = new ObservableCollection<string>();
 
-            _client = new Client(ServerAddress);
-            _client.ReceiveMessage = (sender, message) =>
-            {
-                Application.Current.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Background,
-                    new Action(() =>
-
-                   Messages.Add(sender + " " + message)));
-            };
+            LoadChanges();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Action CloseAction { get; set; }
 
-        #region Commands
-
-        public ICommand AuthorizationCommand { get; set; }
-        public ICommand ClearMessagesCommand { get; set; }
-        public ICommand FindUserCommand { get; set; }
-        public ICommand RegistrationCommand { get; set; }
-        public ICommand SendMessageCommand { get; set; }
-
-        #endregion Commands
-
         public string CurrentUser { get; set; }
-        public MainModel LoginMainModel { get; set; }
+
+        public MainModel MainModel { get; set; }
+
         public string Message { get; set; }
+
         public ObservableCollection<string> Messages { get; set; }
+
         public ObservableCollection<string> Users { get; set; }
 
         private void AuthCommand(object param)
         {
-            #region CheckingForNullLoginAndPassword
+            #region CheckingForValues
 
-            if (string.IsNullOrEmpty(LoginMainModel.Login))
+            if (string.IsNullOrEmpty(MainModel.Login))
             {
                 MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -85,11 +68,31 @@ namespace TestingTemplate.ViewModel
                 return;
             }
 
-            #endregion CheckingForNullLoginAndPassword
-
-            if (!string.IsNullOrEmpty(LoginMainModel.Login) && !string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(MainModel.PathToServer))
             {
-                if (LoginMainModel.Login.Length > 15)
+                MessageBox.Show("Введите путь до сервера!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion CheckingForValues
+
+            string ServerAddress = "http://" + MainModel.PathToServer;
+
+            _client = new Client(ServerAddress);
+
+            _client.ReceiveMessage = (sender, message) =>
+            {
+                Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background,
+                    new Action(() =>
+
+                   Messages.Add(sender + " " + message)));
+            };
+            SaveChanges();
+
+            if (!string.IsNullOrEmpty(MainModel.Login) && !string.IsNullOrEmpty(password))
+            {
+                if (MainModel.Login.Length > 15)
                 {
                     MessageBox.Show("Логин должен не превышать 15 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     return;
@@ -102,13 +105,16 @@ namespace TestingTemplate.ViewModel
 
                 try
                 {
-                    _client.Login(LoginMainModel.Login, password);
+                    _client.Login(MainModel.Login, password);
 
                     _client.StartChat();
 
-                    LoginMainModel.Login = String.Empty;
+                    MainModel.HelloUser = "Здраствуйте:" + "\n" + MainModel.Login;
+
+                    MainModel.Login = String.Empty;
 
                     passwordBox.Password = String.Empty;
+
                     var users = _client.GetAllUsers();
                     _client.GetAllUsers();
                     foreach (var item in users)
@@ -118,7 +124,8 @@ namespace TestingTemplate.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
             }
         }
@@ -128,14 +135,45 @@ namespace TestingTemplate.ViewModel
             Messages.Clear();
         }
 
+        private void LoadChanges()
+        {
+            MainModel.PathToServer = Properties.Settings.Default.PathServer;
+            Properties.Settings.Default.Save();
+        }
+
         private void Registration()
         {
+            if (string.IsNullOrEmpty(MainModel.PathToServer))
+            {
+                MessageBox.Show("Введите путь до сервера!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            string ServerAddress = "http://" + MainModel.PathToServer;
+            SaveChanges();
+            ServerClass.ServerAdress = ServerAddress;
+
             Registration registrationWindow = new Registration();
 
             CloseAction();
 
             registrationWindow.ShowDialog();
         }
+
+        private void SaveChanges()
+        {
+            Properties.Settings.Default.PathServer = MainModel.PathToServer;
+            Properties.Settings.Default.Save();
+        }
+
+        #region Commands
+
+        public ICommand AuthorizationCommand { get; set; }
+        public ICommand ClearMessagesCommand { get; set; }
+
+        public ICommand RegistrationCommand { get; set; }
+        public ICommand SendMessageCommand { get; set; }
+
+        #endregion Commands
 
         private void SendCommand()
         {
@@ -152,7 +190,7 @@ namespace TestingTemplate.ViewModel
             }
             if (Message.Length > 500)
             {
-                MessageBox.Show("Сообщение не должно превышать 500 символов", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Сообщение не должно превышать 500 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
             _client.SendMessage(CurrentUser, Message);
