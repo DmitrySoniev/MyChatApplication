@@ -12,6 +12,7 @@ namespace TestingTemplate.ViewModel
         public RegistrationViewModel()
         {
             RegistrationModel = new RegistrationModel();
+
             RegistrationCommand = new RelayCommand(param => Registration(param));
             BackCommand = new RelayCommand(param => Back());
         }
@@ -103,7 +104,8 @@ namespace TestingTemplate.ViewModel
 
             if (RegistrationModel.GenderMan)
             {
-                var client = new Client(MainViewModel.ServerAddress);
+                var serverAddress = ServerClass.ServerAdress;
+                var client = new Client(serverAddress);
                 try
                 {
                     client.Register(RegistrationModel.Login, password, RegistrationModel.Name, RegistrationModel.Surname, Client.Gender.Men);
@@ -122,7 +124,8 @@ namespace TestingTemplate.ViewModel
 
             if (RegistrationModel.GenderWoman)
             {
-                var client = new Client(MainViewModel.ServerAddress);
+                var serverAddress = ServerClass.ServerAdress;
+                var client = new Client(serverAddress);
                 try
                 {
                     client.Register(RegistrationModel.Login, password, RegistrationModel.Name, RegistrationModel.Surname, Client.Gender.Women);

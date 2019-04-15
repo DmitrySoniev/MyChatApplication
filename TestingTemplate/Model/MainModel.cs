@@ -2,19 +2,24 @@
 
 namespace TestingTemplate.Model
 {
-	public class MainModel : INotifyPropertyChanged
-	{
-		public string Login { get; set; }
+    public class MainModel : INotifyPropertyChanged
+    {
+        public string Login { get; set; }
 
-		public string SendMessage { get; set; }
+        public string SendMessage { get; set; }
 
-		public string FindUser { get; set; }
+        public string PathToServer { get; set; }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Отображение логина пользователя
+        /// </summary>
+        public string UserLogin { get; set; }
 
-		private void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

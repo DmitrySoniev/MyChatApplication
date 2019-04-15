@@ -1,8 +1,7 @@
 ﻿namespace TestingTemplate
 {
-    public class Message
+    public static class ServerClass
     {
-        public string User { get; set; }
-        public string TextMessage{ get; set; }
+        public static string ServerAdress { get; set; }
     }
 }

@@ -28,8 +28,18 @@
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontStretch" Value="Expanded" />
-            <Setter Property="Background" Value="Silver" />
+            <Setter Property="FontStretch" Value="Normal" />
+        </Style>
+        <Style x:Key="ClearMessagesButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,0,0,10">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="18">Очистить</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">
@@ -71,35 +81,49 @@
             <GradientStop Color="White" Offset="1" />
         </RadialGradientBrush>
     </Window.Background>
+
     <DockPanel>
-        <DockPanel DockPanel.Dock="Left" Width="180" Visibility="Visible">
 
-            <TextBlock Foreground="White" Background="#FF3F0E40" FontSize="18" FontWeight="Bold" FontFamily="Helvetica"  DockPanel.Dock="Top" Text="Пользователи" Style="{StaticResource TextBlockStyle}" Padding="10" />
-
-            <ListBox  Name="FriendsListBox" Style="{StaticResource ListboxStyle}" ItemsSource="{Binding Users}" SelectedValue="{Binding CurrentUser}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Ellipse Fill="Green" Height="10" Width="10"></Ellipse>
-                            <TextBlock Foreground="White" FontSize="16" FontFamily="Helvetica" Text="{Binding}" Margin="5"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <DockPanel DockPanel.Dock="Left" Width="180" Visibility="Visible" Background="#FF3F0E40">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=MainModel.UserLogin}" TextWrapping="Wrap" FontSize="18" FontFamily="Helvetica" Foreground="White" FontStyle="Italic"></TextBlock>
+                <Border BorderThickness="1" Background="White">
+                    <TextBlock Foreground="White"  Background="#FF3F0E40" FontSize="18" FontWeight="Bold" FontFamily="Helvetica"  DockPanel.Dock="Top" Text="Пользователи" Style="{StaticResource TextBlockStyle}" Padding="8" />
+                </Border>
+                <ListBox   Name="FriendsListBox" Style="{StaticResource ListboxStyle}" ItemsSource="{Binding Users}" SelectedValue="{Binding CurrentUser}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Fill="Green" Height="10" Width="10"></Ellipse>
+                                <TextBlock Foreground="White" FontSize="16" FontFamily="Helvetica" Text="{Binding}" Margin="5"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
             <StackPanel>
                 <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}" />
 
                 <TextBox Height="20" Name="LoginTextBox"
-                         Text="{Binding LoginMainModel.Login, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding MainModel.Login}"
                          KeyDown="LoginTextBox_OnKeyDown">
                 </TextBox>
                 <TextBlock Text="Пароль"
                            Style="{StaticResource TextBlockStyle}" />
+
                 <PasswordBox Name="PasswordBox"
                              Height="24" KeyDown="PasswordBox_KeyDown">
                 </PasswordBox>
+                <TextBlock
+                    Style="{StaticResource TextBlockStyle}">
+                    Сервер
+                </TextBlock>
+
+                <TextBox Text="{Binding MainModel.PathToServer}">
+                </TextBox>
+
                 <Button Content="Войти"
                         Style="{StaticResource ButtonStyle}"
                         Command ="{Binding AuthorizationCommand}"
@@ -114,13 +138,13 @@
         <DockPanel DockPanel.Dock="Bottom" Height="50">
             <Border BorderBrush="#FF616061" BorderThickness="3" CornerRadius="10" Margin="3">
                 <DockPanel>
-                    <!--<DockPanel DockPanel.Dock="Right" Width="100">
-                        <Button Style="{StaticResource ButtonStyle}"
-                                Command ="{Binding ClearMessagesCommand}" Content="Очистить" DockPanel.Dock="Bottom" />
-                    </DockPanel>-->
+
                     <Button Name="SendButton" Style="{StaticResource SendButtonStyle}" BorderBrush="#FF616061" BorderThickness="3" Width="70" DockPanel.Dock="Right"  Margin="0,-3,-3,-3"   Command="{Binding SendMessageCommand}">
                     </Button>
-
+                    <!--<DockPanel DockPanel.Dock="Right" Width="100">
+                        <Button Style="{StaticResource ClearMessagesButtonStyle}" Margin="-3 -3 -3 -3"
+                                Command ="{Binding ClearMessagesCommand}" Content="Очистить" DockPanel.Dock="Bottom" />
+                    </DockPanel>-->
                     <TextBox  BorderBrush="#00000000" FontSize="17" Padding="5" Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -132,7 +156,7 @@
             </Border>
         </DockPanel>
         <DockPanel>
-            <ListBox Name="MessageListBox" VerticalContentAlignment="Bottom" Padding="10,0,0,0" ItemsSource="{Binding Messages}" local2:SelectorExtenders.IsAutoscroll="true" IsSynchronizedWithCurrentItem="True">
+            <ListBox Name="MessageListBox"  VerticalContentAlignment="Bottom" Padding="10,0,0,0" ItemsSource="{Binding Messages}" IsSynchronizedWithCurrentItem="True">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel VerticalAlignment="Bottom" />
