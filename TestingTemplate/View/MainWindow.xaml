@@ -72,10 +72,8 @@
         </RadialGradientBrush>
     </Window.Background>
     <DockPanel>
-        <DockPanel DockPanel.Dock="Left" Width="180" Visibility="Visible">
-
+        <DockPanel Name="DockPanelFriends" DockPanel.Dock="Left" Width="180" Visibility="Visible">
             <TextBlock Foreground="White" Background="#FF3F0E40" FontSize="18" FontWeight="Bold" FontFamily="Helvetica"  DockPanel.Dock="Top" Text="Пользователи" Style="{StaticResource TextBlockStyle}" Padding="10" />
-
             <ListBox  Name="FriendsListBox" Style="{StaticResource ListboxStyle}" ItemsSource="{Binding Users}" SelectedValue="{Binding CurrentUser}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -87,11 +85,13 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
+
         <DockPanel DockPanel.Dock="Right" Width="120">
-            <StackPanel>
+            <StackPanel Name="Test">
+
                 <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}" />
 
-                <TextBox Height="20" Name="LoginTextBox"
+                    <TextBox Height="20" Name="LoginTextBox"
                          Text="{Binding LoginMainModel.Login, UpdateSourceTrigger=PropertyChanged}"
                          KeyDown="LoginTextBox_OnKeyDown">
                 </TextBox>
