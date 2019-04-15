@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
 using TestingTemplate.Model;
 
@@ -27,7 +26,9 @@ namespace TestingTemplate.ViewModel
 
             ClearMessagesCommand = new RelayCommand(param => ClearMessages());
 
-            Messages = new ObservableCollection<string>();
+           
+
+                Messages = new ObservableCollection<string>();
 
             Users = new ObservableCollection<string>();
 
@@ -99,19 +100,11 @@ namespace TestingTemplate.ViewModel
                     return;
                 }
 
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = "Здраствуйте," + LoginMainModel.Login;
-                FontFamily fontfamily = new FontFamily("Helvetica");
-                textBlock.FontFamily = (fontfamily);
-                textBlock.Foreground = new SolidColorBrush(Colors.White);
-                textBlock.FontSize = 18;
-                MainWindow mw = new MainWindow();
-                mw.Test.Children.Add(textBlock);
                 try
                 {
-                    //_client.Login(LoginMainModel.Login, password);
+                    _client.Login(LoginMainModel.Login, password);
 
-                    //_client.StartChat();
+                    _client.StartChat();
 
                     LoginMainModel.Login = String.Empty;
 
