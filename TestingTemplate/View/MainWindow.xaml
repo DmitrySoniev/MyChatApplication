@@ -60,7 +60,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="Black" BorderThickness="2" Height="25" CornerRadius="6" Background="White">
+                        <Border BorderBrush="Gray" BorderThickness="2" Height="25" CornerRadius="6" Background="White">
                             <TextBlock HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="15" FontWeight="DemiBold" VerticalAlignment="Center">
                                 Регистрация
                             </TextBlock>
@@ -79,7 +79,7 @@
 
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="6" Background="White" Height="25">
+                        <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="6" Background="White" Height="25">
 
                             <TextBlock HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="15"  FontWeight="DemiBold" VerticalAlignment="Center">
                                 Войти
