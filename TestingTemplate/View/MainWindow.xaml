@@ -11,7 +11,18 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.Resources>
-
+        <Style x:Key="MainTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Black" />
+                <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
+        </Style>
         <Style x:Key="TextboxStyle" TargetType="TextBox">
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Template">
@@ -24,7 +35,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border CornerRadius="5" x:Name="BorderStyle" BorderBrush="Black" BorderThickness="1" Background="White">
+                            <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
@@ -104,30 +128,39 @@
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
             <StackPanel>
-                <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}" />
+                <TextBlock Text="Логин"
+                           Style="{StaticResource TextBlockStyle}">
+                </TextBlock>
 
                 <TextBox Height="20" Name="LoginTextBox"
                          Text="{Binding MainModel.Login}"
-                         KeyDown="LoginTextBox_OnKeyDown">
+                         KeyDown="LoginTextBox_OnKeyDown"
+                         Style="{StaticResource MainTextBoxStyle}">
                 </TextBox>
                 <TextBlock Text="Пароль"
-                           Style="{StaticResource TextBlockStyle}" />
+                           Style="{StaticResource TextBlockStyle}">
+                </TextBlock>
 
                 <PasswordBox Name="PasswordBox"
-                             Height="24" KeyDown="PasswordBox_KeyDown">
+                             Height="20" KeyDown="PasswordBox_KeyDown"
+                             Style="{StaticResource PasswordBoxStyle}">
                 </PasswordBox>
-                <TextBlock
-                    Style="{StaticResource TextBlockStyle}">
+
+                <TextBlock Style="{StaticResource TextBlockStyle}">
                     Сервер
                 </TextBlock>
 
-                <TextBox Text="{Binding MainModel.PathToServer}">
+                <TextBox Text="{Binding MainModel.PathToServer}"
+                         Style="{StaticResource MainTextBoxStyle}"
+                         Height="20">
                 </TextBox>
 
                 <Button Content="Войти"
                         Style="{StaticResource ButtonStyle}"
                         Command ="{Binding AuthorizationCommand}"
-                        CommandParameter="{Binding ElementName=PasswordBox}" />
+                        CommandParameter="{Binding ElementName=PasswordBox}">
+                </Button>
+
                 <Button Style="{StaticResource ButtonStyle }"
                         Command ="{Binding RegistrationCommand}">
                     Регистрация
@@ -138,14 +171,23 @@
         <DockPanel DockPanel.Dock="Bottom" Height="50">
             <Border BorderBrush="#FF616061" BorderThickness="3" CornerRadius="10" Margin="3">
                 <DockPanel>
-
-                    <Button Name="SendButton" Style="{StaticResource SendButtonStyle}" BorderBrush="#FF616061" BorderThickness="3" Width="70" DockPanel.Dock="Right"  Margin="0,-3,-3,-3"   Command="{Binding SendMessageCommand}">
+                    <Button Name="SendButton"
+                            Style="{StaticResource SendButtonStyle}"
+                            BorderBrush="#FF616061"
+                            BorderThickness="3"
+                            Width="70"
+                            DockPanel.Dock="Right"
+                            Margin="0,-3,-3,-3"
+                            Command="{Binding SendMessageCommand}">
                     </Button>
                     <!--<DockPanel DockPanel.Dock="Right" Width="100">
                         <Button Style="{StaticResource ClearMessagesButtonStyle}" Margin="-3 -3 -3 -3"
                                 Command ="{Binding ClearMessagesCommand}" Content="Очистить" DockPanel.Dock="Bottom" />
                     </DockPanel>-->
-                    <TextBox  BorderBrush="#00000000" FontSize="17" Padding="5" Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown">
+                    <TextBox  BorderBrush="#00000000"
+                              FontSize="17" Padding="5"
+                              Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                              PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="8,0,0,8" />
@@ -156,7 +198,11 @@
             </Border>
         </DockPanel>
         <DockPanel>
-            <ListBox Name="MessageListBox"  VerticalContentAlignment="Bottom" Padding="10,0,0,0" ItemsSource="{Binding Messages}" IsSynchronizedWithCurrentItem="True">
+            <ListBox Name="MessageListBox"
+                     VerticalContentAlignment="Bottom"
+                     Padding="10,0,0,0"
+                     ItemsSource="{Binding Messages}"
+                     IsSynchronizedWithCurrentItem="True">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel VerticalAlignment="Bottom" />
