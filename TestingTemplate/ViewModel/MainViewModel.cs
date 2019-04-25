@@ -158,7 +158,7 @@ namespace TestingTemplate.ViewModel
 
             Registration registrationWindow = new Registration();
 
-            CloseAction();
+            //CloseAction();
 
             registrationWindow.ShowDialog();
         }

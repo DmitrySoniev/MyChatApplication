@@ -26,11 +26,7 @@ namespace TestingTemplate.ViewModel
 
         public void Back()
         {
-            MainWindow mainWindow = new MainWindow();
-
             CloseAction();
-
-            mainWindow.ShowDialog();
         }
 
         public void Registration(object param)
@@ -117,8 +113,9 @@ namespace TestingTemplate.ViewModel
                 }
 
                 MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 MainWindow mainWindow = new MainWindow();
-                CloseAction();
+
                 mainWindow.ShowDialog();
             }
 

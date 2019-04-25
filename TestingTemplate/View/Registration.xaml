@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:VM="clr-namespace:TestingTemplate.ViewModel"
         mc:Ignorable="d"
-        Title="Регистрация" Height="285.078" Width="320.041" ResizeMode="CanMinimize">
+        Title="Регистрация" Height="241.578" Width="319.041" ResizeMode="CanMinimize" WindowStyle="None">
     <Window.DataContext>
         <VM:RegistrationViewModel />
     </Window.DataContext>
@@ -17,7 +17,7 @@
             <Setter Property="FontStretch" Value="Expanded" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5" />
@@ -28,14 +28,14 @@
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
-            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
         </Style>
 
         <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
-            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
         </Style>
 
         <Style x:Key="RegistrationButtonStyle" TargetType="Button">
@@ -70,7 +70,7 @@
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
-                        <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="PasswordBox">
@@ -92,7 +92,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="0,0,-6,0">
+    <Grid Margin="0,-2,-3,0">
 
         <TextBlock HorizontalAlignment="Left"
                    Margin="10,10,0,0"
@@ -185,16 +185,15 @@
                 Command="{Binding RegistrationCommand}"
                 CommandParameter="{Binding ElementName=PasswordBox}"
                 HorizontalAlignment="Left"
-                Margin="182,204,0,0"
+                Margin="181,195,0,0"
                 VerticalAlignment="Top"
                 Width="110"
                 RenderTransformOrigin="-0.4,1.15"
-                Style="{StaticResource RegistrationButtonStyle}"
-                >
+                Style="{StaticResource RegistrationButtonStyle}">
         </Button>
         <Button Name="BackButton"
                 HorizontalAlignment="Left"
-                Margin="25,204,0,0"
+                Margin="22,195,0,0"
                 VerticalAlignment="Top"
                 Width="110"
                 Style="{StaticResource BackButtonStyle}"
