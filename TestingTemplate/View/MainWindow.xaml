@@ -11,7 +11,18 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <Style x:Key="MainTextBoxStyle" TargetType="TextBox">
+        <Style x:Key="SendMessageTextBox" TargetType="TextBox">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+        </Style>
+
+        <Style x:Key="MessagesListBoxStyle" TargetType="ListBox">
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+        </Style>
+                <Style x:Key="MainTextBoxStyle" TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontStretch" Value="Expanded" />
@@ -126,7 +137,7 @@
         <Style x:Key="ListboxStyle" TargetType="ListBox">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="FontWeight" Value="DemiBold" />
             <Setter Property="Width" Value="1000" />
             <Setter Property="Background">
                 <Setter.Value>
@@ -166,7 +177,7 @@
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
-            <StackPanel>
+            <StackPanel Name="MainStackPanel">
                 <TextBlock Text="Логин"
                            Style="{StaticResource TextBlockStyle}">
                 </TextBlock>
@@ -224,7 +235,8 @@
                     <TextBox  BorderBrush="#00000000"
                               FontSize="17" Padding="5"
                               Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
-                              PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown">
+                              PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown"
+                              Style="{StaticResource SendMessageTextBox}">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="8,0,0,8" />
@@ -239,7 +251,8 @@
                      VerticalContentAlignment="Bottom"
                      Padding="10,0,0,0"
                      ItemsSource="{Binding Messages}"
-                     IsSynchronizedWithCurrentItem="True">
+                     IsSynchronizedWithCurrentItem="True"
+                     Style="{StaticResource MessagesListBoxStyle}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel VerticalAlignment="Bottom" />
