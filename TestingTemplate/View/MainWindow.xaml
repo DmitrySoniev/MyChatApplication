@@ -179,7 +179,7 @@
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
-            <StackPanel Name="MainStackPanel">
+            <StackPanel Name="MainStackPanel" Width="115">
                 <TextBlock Text="Логин"
                            Style="{StaticResource TextBlockStyle}">
                 </TextBlock>
