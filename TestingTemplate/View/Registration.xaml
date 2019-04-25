@@ -49,7 +49,7 @@
                                              Grid.RowSpan="3"
                                              Fill="Transparent"
                                              StrokeThickness="2"
-                                             Stroke="LightGray" />
+                                             Stroke="#FF3F0E40" />
                                     <Ellipse Name="CheckMark"
                                              Grid.Column="1"
                                              Grid.Row="1"
@@ -275,13 +275,13 @@
                               Style="{StaticResource  RadioButtonStyle}">
         </RadioButton>
 
-        <Grid Margin="0,182,0,0" Background="#FF3F0E40">
+        <Grid Margin="0,187,0,0" Background="#FF3F0E40">
         </Grid>
         <Button Name="RegistrationButton"
                 Command="{Binding RegistrationCommand}"
                 CommandParameter="{Binding ElementName=PasswordBox}"
                 HorizontalAlignment="Left"
-                Margin="181,195,0,0"
+                Margin="182,203,0,0"
                 VerticalAlignment="Top"
                 Width="110"
                 RenderTransformOrigin="-0.4,1.15"
@@ -289,7 +289,7 @@
         </Button>
         <Button Name="BackButton"
                 HorizontalAlignment="Left"
-                Margin="22,195,0,0"
+                Margin="23,203,0,0"
                 VerticalAlignment="Top"
                 Width="110"
                 Style="{StaticResource BackButtonStyle}"
