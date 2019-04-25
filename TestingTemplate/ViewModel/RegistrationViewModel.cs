@@ -120,9 +120,7 @@ namespace TestingTemplate.ViewModel
 
                 MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                MainWindow mainWindow = new MainWindow();
-
-                mainWindow.ShowDialog();
+                CloseAction();
             }
 
             if (RegistrationModel.GenderWoman)
@@ -140,9 +138,8 @@ namespace TestingTemplate.ViewModel
                 }
 
                 MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                MainWindow mainWindow = new MainWindow();
+
                 CloseAction();
-                mainWindow.ShowDialog();
             }
         }
     }
