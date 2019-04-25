@@ -78,9 +78,9 @@ namespace TestingTemplate.ViewModel
 
             #region ValuesLength
 
-            if (RegistrationModel.Login.Length > 15)
+            if (RegistrationModel.Login.Length > 40)
             {
-                MessageBox.Show("Логин не должен превышать 15 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Логин не должен превышать 40 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
