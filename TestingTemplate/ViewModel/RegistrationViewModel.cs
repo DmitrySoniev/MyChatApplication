@@ -26,7 +26,13 @@ namespace TestingTemplate.ViewModel
 
         public void Back()
         {
-            CloseAction();
+            if (MessageBox.Show("Вы действительно хотите вернуться?", "", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            {
+            }
+            else
+            {
+                CloseAction();
+            }
         }
 
         public void Registration(object param)
