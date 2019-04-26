@@ -26,11 +26,13 @@ namespace TestingTemplate.ViewModel
 
         public void Back()
         {
-            MainWindow mainWindow = new MainWindow();
-
-            CloseAction();
-
-            mainWindow.ShowDialog();
+            if (MessageBox.Show("Вы действительно хотите вернуться?", "", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            {
+            }
+            else
+            {
+                CloseAction();
+            }
         }
 
         public void Registration(object param)
@@ -76,9 +78,9 @@ namespace TestingTemplate.ViewModel
 
             #region ValuesLength
 
-            if (RegistrationModel.Login.Length > 15)
+            if (RegistrationModel.Login.Length > 40)
             {
-                MessageBox.Show("Логин не должен превышать 15 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Логин не должен превышать 40 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
@@ -117,9 +119,8 @@ namespace TestingTemplate.ViewModel
                 }
 
                 MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                MainWindow mainWindow = new MainWindow();
+
                 CloseAction();
-                mainWindow.ShowDialog();
             }
 
             if (RegistrationModel.GenderWoman)
@@ -137,9 +138,8 @@ namespace TestingTemplate.ViewModel
                 }
 
                 MessageBox.Show("Регистрация прошла успешно.", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
-                MainWindow mainWindow = new MainWindow();
+
                 CloseAction();
-                mainWindow.ShowDialog();
             }
         }
     }

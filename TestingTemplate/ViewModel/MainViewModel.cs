@@ -152,13 +152,15 @@ namespace TestingTemplate.ViewModel
                 MessageBox.Show("Введите путь до сервера!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
             string ServerAddress = "http://" + MainModel.PathToServer;
+
             SaveChanges();
             ServerClass.ServerAdress = ServerAddress;
 
             Registration registrationWindow = new Registration();
 
-            CloseAction();
+            //CloseAction();
 
             registrationWindow.ShowDialog();
         }

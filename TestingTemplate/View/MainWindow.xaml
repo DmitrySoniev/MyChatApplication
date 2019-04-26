@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TestingTemplate.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:d="http://schemas.microsoft.comt/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingTemplate.ViewModel"
         xmlns:local2="clr-namespace:TestingTemplate"
@@ -11,7 +11,32 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.Resources>
+        <Style x:Key="SendMessageTextBox" TargetType="TextBox">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+        </Style>
 
+        <Style x:Key="MessagesListBoxStyle" TargetType="ListBox">
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="BorderBrush" Value="#FF616061" />
+        </Style>
+        <Style x:Key="MainTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
+        </Style>
         <Style x:Key="TextboxStyle" TargetType="TextBox">
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Template">
@@ -24,18 +49,68 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border CornerRadius="5" x:Name="BorderStyle" BorderBrush="Black" BorderThickness="1" Background="White">
+                            <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <Style x:Key="RegistrationButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Normal" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1.4" Height="25" CornerRadius="6" Background="White">
+                            <TextBlock HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="15" FontWeight="DemiBold" VerticalAlignment="Center">
+                                Регистрация
+                            </TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+
+        <Style x:Key="AuthorizationButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontStretch" Value="Normal" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1.4" CornerRadius="6" Background="White" Height="25">
+
+                            <TextBlock HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="15"  FontWeight="DemiBold" VerticalAlignment="Center">
+                                Войти
+                            </TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="ClearMessagesButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
                         <Border BorderBrush="#FF616061"  BorderThickness="3" CornerRadius="10,0,0,10">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="18">Очистить</TextBlock>
+                            <TextBlock HorizontalAlignment="Center"  Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="18" VerticalAlignment="Center">
+                                Очистить
+                            </TextBlock>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -47,6 +122,7 @@
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
             <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="DemiBold" />
         </Style>
 
         <Style TargetType="Button"  x:Key="SendButtonStyle">
@@ -63,7 +139,7 @@
         <Style x:Key="ListboxStyle" TargetType="ListBox">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="FontWeight" Value="DemiBold" />
             <Setter Property="Width" Value="1000" />
             <Setter Property="Background">
                 <Setter.Value>
@@ -86,7 +162,7 @@
 
         <DockPanel DockPanel.Dock="Left" Width="180" Visibility="Visible" Background="#FF3F0E40">
             <StackPanel>
-                <TextBlock Text="{Binding Path=MainModel.UserLogin}" TextWrapping="Wrap" FontSize="18" FontFamily="Helvetica" Foreground="White" FontStyle="Italic"></TextBlock>
+                <TextBlock Text="{Binding Path=MainModel.UserLogin}" TextWrapping="Wrap" FontSize="18" FontFamily="Helvetica" Foreground="White" Style="{StaticResource  TextBlockStyle}"></TextBlock>
                 <Border BorderThickness="1" Background="White">
                     <TextBlock Foreground="White"  Background="#FF3F0E40" FontSize="18" FontWeight="Bold" FontFamily="Helvetica"  DockPanel.Dock="Top" Text="Пользователи" Style="{StaticResource TextBlockStyle}" Padding="8" />
                 </Border>
@@ -103,34 +179,41 @@
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Right" Width="120">
-            <StackPanel>
-                <TextBlock Text="Логин" Style="{StaticResource TextBlockStyle}" />
+            <StackPanel Name="MainStackPanel" Width="115">
+                <TextBlock Text="Логин"
+                           Style="{StaticResource TextBlockStyle}">
+                </TextBlock>
 
                 <TextBox Height="20" Name="LoginTextBox"
                          Text="{Binding MainModel.Login}"
-                         KeyDown="LoginTextBox_OnKeyDown">
+                         KeyDown="LoginTextBox_OnKeyDown"
+                         Style="{StaticResource MainTextBoxStyle}">
                 </TextBox>
                 <TextBlock Text="Пароль"
-                           Style="{StaticResource TextBlockStyle}" />
+                           Style="{StaticResource TextBlockStyle}">
+                </TextBlock>
 
                 <PasswordBox Name="PasswordBox"
-                             Height="24" KeyDown="PasswordBox_KeyDown">
+                             Height="20" KeyDown="PasswordBox_KeyDown"
+                             Style="{StaticResource PasswordBoxStyle}">
                 </PasswordBox>
-                <TextBlock
-                    Style="{StaticResource TextBlockStyle}">
+
+                <TextBlock Style="{StaticResource TextBlockStyle}">
                     Сервер
                 </TextBlock>
 
-                <TextBox Text="{Binding MainModel.PathToServer}">
+                <TextBox Text="{Binding MainModel.PathToServer}"
+                         Style="{StaticResource MainTextBoxStyle}"
+                         Height="20">
                 </TextBox>
 
-                <Button Content="Войти"
-                        Style="{StaticResource ButtonStyle}"
+                <Button Style="{StaticResource AuthorizationButtonStyle}"
                         Command ="{Binding AuthorizationCommand}"
-                        CommandParameter="{Binding ElementName=PasswordBox}" />
-                <Button Style="{StaticResource ButtonStyle }"
+                        CommandParameter="{Binding ElementName=PasswordBox}">
+                </Button>
+
+                <Button Style="{StaticResource RegistrationButtonStyle}"
                         Command ="{Binding RegistrationCommand}">
-                    Регистрация
                 </Button>
             </StackPanel>
         </DockPanel>
@@ -138,14 +221,24 @@
         <DockPanel DockPanel.Dock="Bottom" Height="50">
             <Border BorderBrush="#FF616061" BorderThickness="3" CornerRadius="10" Margin="3">
                 <DockPanel>
-
-                    <Button Name="SendButton" Style="{StaticResource SendButtonStyle}" BorderBrush="#FF616061" BorderThickness="3" Width="70" DockPanel.Dock="Right"  Margin="0,-3,-3,-3"   Command="{Binding SendMessageCommand}">
+                    <Button Name="SendButton"
+                            Style="{StaticResource SendButtonStyle}"
+                            BorderBrush="#FF616061"
+                            BorderThickness="3"
+                            Width="70"
+                            DockPanel.Dock="Right"
+                            Margin="0,-3,-3,-3"
+                            Command="{Binding SendMessageCommand}">
                     </Button>
                     <!--<DockPanel DockPanel.Dock="Right" Width="100">
                         <Button Style="{StaticResource ClearMessagesButtonStyle}" Margin="-3 -3 -3 -3"
                                 Command ="{Binding ClearMessagesCommand}" Content="Очистить" DockPanel.Dock="Bottom" />
                     </DockPanel>-->
-                    <TextBox  BorderBrush="#00000000" FontSize="17" Padding="5" Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown">
+                    <TextBox  BorderBrush="#00000000"
+                              FontSize="17" Padding="5"
+                              Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                              PreviewKeyDown="SendMessageTextbox_OnPreviewKeyDown"
+                              Style="{StaticResource SendMessageTextBox}">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="8,0,0,8" />
@@ -156,12 +249,23 @@
             </Border>
         </DockPanel>
         <DockPanel>
-            <ListBox Name="MessageListBox"  VerticalContentAlignment="Bottom" Padding="10,0,0,0" ItemsSource="{Binding Messages}" IsSynchronizedWithCurrentItem="True">
+            <ListBox Name="MessageListBox"
+                     VerticalContentAlignment="Bottom"
+                     Padding="0"
+                     ItemsSource="{Binding Messages}"
+                     IsSynchronizedWithCurrentItem="True"
+                     Style="{StaticResource MessagesListBoxStyle}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel VerticalAlignment="Bottom" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10" />
+                        <Setter Property="Margin" Value="3,1,3,1" />
+                    </Style>
+                </ListBox.Resources>
             </ListBox>
         </DockPanel>
     </DockPanel>

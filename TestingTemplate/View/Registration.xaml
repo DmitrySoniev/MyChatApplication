@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:VM="clr-namespace:TestingTemplate.ViewModel"
         mc:Ignorable="d"
-        Title="Регистрация" Height="300.729" Width="323.639" ResizeMode="CanMinimize">
+        Title="Регистрация" Height="241.578" Width="319.041" ResizeMode="NoResize" WindowStyle="None">
     <Window.DataContext>
         <VM:RegistrationViewModel />
     </Window.DataContext>
@@ -15,27 +15,133 @@
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
         </Style>
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="FontWeight" Value="DemiBold" />
         </Style>
 
         <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <BulletDecorator Margin="-5">
+                            <BulletDecorator.Bullet>
+                                <Grid Margin="1,5,-23,-27">
+                                    <Ellipse Name="EllipseMain"
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="3"
+                                             Grid.Row="0"
+                                             Grid.RowSpan="3"
+                                             Fill="Transparent"
+                                             StrokeThickness="2"
+                                             Stroke="#FF3F0E40" />
+                                    <Ellipse Name="CheckMark"
+                                             Grid.Column="1"
+                                             Grid.Row="1"
+                                             Opacity="1"
+                                             Fill="#FF3F0E40"
+                                             Margin="6"
+                                             Width="Auto" />
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="CheckMark"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             Duration="0:0:0.3"
+                                                             To="6" />
+                                            <ColorAnimation Storyboard.TargetName="EllipseMain"
+                                                            Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                            To="#FF4EB3EE"
+                                                            Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetName="CheckMark"
+                                                                Storyboard.TargetProperty="Margin"
+                                                                Duration="0:0:0.2"
+                                                                To="6" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetName="CheckMark"
+                                                                Storyboard.TargetProperty="Margin"
+                                                                Duration="0:0:0.2"
+                                                                To="11" />
+                                            <ColorAnimation Storyboard.TargetName="EllipseMain"
+                                                            Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                            To="LightGray"
+                                                            Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetName="CheckMark"
+                                                                Storyboard.TargetProperty="Margin"
+                                                                Duration="0:0:0.3"
+                                                                To="6" />
+                                            <ColorAnimation Storyboard.TargetName="EllipseMain"
+                                                            Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                            To="#FF4EB3EE"
+                                                            Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Margin="13,7,0,7"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"
+                                              Width="295" />
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused"
+                                     Value="True">
+                                <Setter TargetName="EllipseMain"
+                                        Property="Stroke"
+                                        Value="#FF4EB3EE" />
+                            </Trigger>
+                            <Trigger Property="IsFocused"
+                                     Value="False">
+                                <Setter TargetName="EllipseMain"
+                                        Property="Stroke"
+                                        Value="#FF4EB3EE" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="RegistrationButtonStyle" TargetType="Button">
-
             <Setter Property="Template">
-
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="#FF616061"  BorderThickness="1" CornerRadius="10,10,10,10" Background="LightGray">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="15">Регистрация</TextBlock>
+                        <Border BorderBrush="Black"  BorderThickness="1.3" CornerRadius="7" Background="White" Height="28">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"  FontSize="15" FontWeight="DemiBold">
+                                Регистрация
+                            </TextBlock>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -46,8 +152,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="#FF616061"  BorderThickness="1" CornerRadius="10,10,10,10" Background="LightGray">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF616061" Margin="0,-10,0,0"  FontSize="15">Вернуться</TextBlock>
+                        <Border BorderBrush="Black"  BorderThickness="1.3"  Background="White" CornerRadius="7" Height="28">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="15" FontWeight="DemiBold">
+                                Назад
+                            </TextBlock>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -58,21 +166,134 @@
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Expanded" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+
+                        <Border CornerRadius="5" x:Name="bd" Background="White" BorderBrush="Black" BorderThickness="1">
+                            <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsKeyboardFocusWithin" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="bd" Property="Visibility" Value="Visible" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,-8,-8">
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}" />
-        <TextBox  HorizontalAlignment="Left" Height="23" Margin="116,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" Style="{StaticResource TextBoxStyle}" Text="{Binding RegistrationModel.Login}" />
-        <TextBlock HorizontalAlignment="Left" Margin="10,54,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}" />
-        <TextBlock HorizontalAlignment="Left" Margin="11,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Имя" Style="{StaticResource TextBlockStyle}" />
-        <TextBox  HorizontalAlignment="Left" Height="23" Margin="116,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" Style="{StaticResource TextBoxStyle}" Text="{Binding RegistrationModel.Name}" />
-        <TextBlock  HorizontalAlignment="Left" Margin="11,136,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}" />
-        <TextBox  HorizontalAlignment="Left" Height="23" Margin="116,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" Style="{StaticResource TextBoxStyle}" Text="{Binding RegistrationModel.Surname}" />
-        <TextBlock HorizontalAlignment="Left" Margin="13,182,0,0" TextWrapping="Wrap" Text="Пол" VerticalAlignment="Top" Style="{StaticResource TextBlockStyle}" />
-        <RadioButton  Content="Мужской" IsChecked="{Binding RegistrationModel.GenderMan, Mode=TwoWay}" HorizontalAlignment="Left" Margin="116,186,0,0" VerticalAlignment="Top" Style="{StaticResource RadioButtonStyle}" />
-        <RadioButton  Content="Женский" IsChecked="{Binding RegistrationModel.GenderWoman}" HorizontalAlignment="Left" Margin="224,186,0,0" VerticalAlignment="Top" Style="{StaticResource  RadioButtonStyle}" />
-        <Button Name="RegistrationButton" Command="{Binding RegistrationCommand}" CommandParameter="{Binding ElementName=PasswordBox}" HorizontalAlignment="Left" Margin="181,224,0,0" VerticalAlignment="Top" Width="108" RenderTransformOrigin="-0.4,1.15" Style="{StaticResource RegistrationButtonStyle}" Height="31" />
-        <Button Name="BackButton" HorizontalAlignment="Left" Margin="36,224,0,0" VerticalAlignment="Top" Width="84" Style="{StaticResource BackButtonStyle}" Height="30" Command="{Binding BackCommand}" />
-        <PasswordBox Name ="PasswordBox" HorizontalAlignment="Left" Margin="116,45,0,0" VerticalAlignment="Top" Width="185" Height="23" Style="{StaticResource PasswordBoxStyle}" />
+
+    <Grid Margin="0,-2,-3,0">
+
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="10,10,0,0"
+                   TextWrapping="Wrap"
+                   Text="Логин"
+                   VerticalAlignment="Top"
+                   Style="{StaticResource TextBlockStyle}">
+        </TextBlock>
+        <TextBox  HorizontalAlignment="Left"
+                  Height="23"
+                  Margin="116,10,0,0"
+                  TextWrapping="Wrap"
+                  VerticalAlignment="Top"
+                  Width="185"
+                  Style="{StaticResource TextBoxStyle}"
+                  Text="{Binding RegistrationModel.Login}">
+        </TextBox>
+        <PasswordBox Name ="PasswordBox"
+                     HorizontalAlignment="Left"
+                     Margin="116,45,0,0"
+                     VerticalAlignment="Top"
+                     Width="185"
+                     Height="23"
+                     Style="{StaticResource PasswordBoxStyle}">
+        </PasswordBox>
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="10,45,0,0"
+                   TextWrapping="Wrap"
+                   Text="Пароль"
+                   VerticalAlignment="Top"
+                   Style="{StaticResource TextBlockStyle}">
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="10,85,0,0"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Top"
+                   Text="Имя"
+                   Style="{StaticResource TextBlockStyle}">
+        </TextBlock>
+        <TextBox  HorizontalAlignment="Left"
+                  Height="23"
+                  Margin="116,85,0,0"
+                  TextWrapping="Wrap"
+                  VerticalAlignment="Top"
+                  Width="185"
+                  Style="{StaticResource TextBoxStyle}"
+                  Text="{Binding RegistrationModel.Name}">
+        </TextBox>
+        <TextBlock  HorizontalAlignment="Left"
+                    Margin="10,122,0,0"
+                    TextWrapping="Wrap"
+                    Text="Фамилия"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource TextBlockStyle}">
+        </TextBlock>
+        <TextBox  HorizontalAlignment="Left"
+                  Height="23"
+                  Margin="116,122,0,0"
+                  TextWrapping="Wrap"
+                  VerticalAlignment="Top"
+                  Width="185"
+                  Style="{StaticResource TextBoxStyle}"
+                  Text="{Binding RegistrationModel.Surname}">
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="10,155,0,0"
+                   TextWrapping="Wrap"
+                   Text="Пол"
+                   VerticalAlignment="Top"
+                   Style="{StaticResource TextBlockStyle}">
+        </TextBlock>
+        <RadioButton  Content="Мужской"
+                      IsChecked="{Binding RegistrationModel.GenderMan, Mode=TwoWay}"
+                      HorizontalAlignment="Left"
+                      Margin="116,160,0,0"
+                      VerticalAlignment="Top"
+                      Style="{StaticResource RadioButtonStyle}">
+        </RadioButton>
+        <RadioButton  Content="Женский"
+                              IsChecked="{Binding RegistrationModel.GenderWoman}"
+                              HorizontalAlignment="Left"
+                              Margin="221,160,0,0"
+                              VerticalAlignment="Top"
+                              Style="{StaticResource  RadioButtonStyle}">
+        </RadioButton>
+
+        <Grid Margin="0,187,0,0" Background="#FF3F0E40">
+        </Grid>
+        <Button Name="RegistrationButton"
+                Command="{Binding RegistrationCommand}"
+                CommandParameter="{Binding ElementName=PasswordBox}"
+                HorizontalAlignment="Left"
+                Margin="182,203,0,0"
+                VerticalAlignment="Top"
+                Width="110"
+                RenderTransformOrigin="-0.4,1.15"
+                Style="{StaticResource RegistrationButtonStyle}">
+        </Button>
+        <Button Name="BackButton"
+                HorizontalAlignment="Left"
+                Margin="23,203,0,0"
+                VerticalAlignment="Top"
+                Width="110"
+                Style="{StaticResource BackButtonStyle}"
+                Command="{Binding BackCommand}">
+        </Button>
     </Grid>
 </Window>
