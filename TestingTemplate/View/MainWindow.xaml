@@ -34,9 +34,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border CornerRadius="5" BorderBrush="Black" BorderThickness="1">
+                        <Border Name="TextBoxTemplate"  CornerRadius="5" BorderBrush="Black" BorderThickness="1">
                             <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TextBoxTemplate" Property="BorderBrush" Value="DeepSkyBlue" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -64,6 +69,11 @@
                         <Border CornerRadius="5" x:Name="BorderStyle" BorderBrush="Black" BorderThickness="1" Background="White">
                             <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BorderStyle" Property="BorderBrush" Value="DeepSkyBlue" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -77,11 +87,17 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1.4" Height="25" CornerRadius="6" Background="White">
+                        <Border Name="RegistrationButtonTemplate"  BorderBrush="Black" BorderThickness="1.4" Height="25" CornerRadius="6" Background="White">
                             <TextBlock HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="15" FontWeight="DemiBold" VerticalAlignment="Center">
                                 Регистрация
                             </TextBlock>
                         </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="RegistrationButtonTemplate" Property="Background" Value="LightGray"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -93,15 +109,18 @@
             <Setter Property="FontStretch" Value="Normal" />
             <Setter Property="Height" Value="40" />
             <Setter Property="Template">
-
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1.4" CornerRadius="6" Background="White" Height="25">
-
+                        <Border  Name="BorderTextBox"  BorderBrush="Black" BorderThickness="1.4" CornerRadius="6" Background="White" Height="25">
                             <TextBlock HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="15"  FontWeight="DemiBold" VerticalAlignment="Center">
                                 Войти
                             </TextBlock>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BorderTextBox" Property="Background" Value="LightGray"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
