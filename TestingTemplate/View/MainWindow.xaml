@@ -107,7 +107,7 @@
             <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontStretch" Value="Normal" />
-
+            <Setter Property="Height" Value="45" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -229,14 +229,12 @@
                          Style="{StaticResource MainTextBoxStyle}"
                          Height="20">
                 </TextBox>
-                <Label>
-                </Label>
+
                 <Button Style="{StaticResource AuthorizationButtonStyle}"
                         Command ="{Binding AuthorizationCommand}"
                         CommandParameter="{Binding ElementName=PasswordBox}">
                 </Button>
-                <Label>
-                </Label>
+
                 <Button Style="{StaticResource RegistrationButtonStyle}"
                         Command ="{Binding RegistrationCommand}">
                 </Button>
