@@ -36,18 +36,6 @@ namespace TestingTemplate
             }
         }
 
-        private void MainDockPanelMouseLeave(object sender, MouseEventArgs e)
-        {
-            MainDockPanel.Visibility = Visibility.Collapsed;
-            //MessageBox.Show("Hello");
-        }
-
-        private void MainDockPanelPreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            if(MainDockPanel.Visibility == Visibility.Collapsed)
-            MainDockPanel.Visibility = Visibility.Visible;
-            //MessageBox.Show("Hello");
-        }
         private void LoginTextBox_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
