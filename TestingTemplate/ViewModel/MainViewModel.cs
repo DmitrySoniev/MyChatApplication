@@ -96,9 +96,9 @@ namespace TestingTemplate.ViewModel
 
             if (!string.IsNullOrEmpty(MainModel.Login) && !string.IsNullOrEmpty(password))
             {
-                if (MainModel.Login.Length > 15)
+                if (MainModel.Login.Length > 40)
                 {
-                    MessageBox.Show("Логин должен не превышать 15 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("Логин должен не превышать 40 символов!", "Предупреждение!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     return;
                 }
                 if (password.Length > 20)
@@ -113,18 +113,17 @@ namespace TestingTemplate.ViewModel
 
                     _client.StartChat();
 
-                    MainModel.UserLogin = "Здравствуйте:" + "\n" + MainModel.Login;
-
-                    MainModel.Login = String.Empty;
-
-                    passwordBox.Password = String.Empty;
-
                     var users = _client.GetAllUsers();
                     _client.GetAllUsers();
                     foreach (var item in users)
                     {
                         Users.Add(item);
                     }
+                    MainModel.UserLogin = "Здравствуйте:" + "\n" + MainModel.Login;
+
+                    MainModel.Login = String.Empty;
+
+                    passwordBox.Password = String.Empty;
                 }
                 catch (Exception ex)
                 {
