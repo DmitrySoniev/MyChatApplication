@@ -159,8 +159,6 @@ namespace TestingTemplate.ViewModel
 
             Registration registrationWindow = new Registration();
 
-            //CloseAction();
-
             registrationWindow.ShowDialog();
         }
 
@@ -184,13 +182,13 @@ namespace TestingTemplate.ViewModel
         {
             if (string.IsNullOrEmpty(CurrentUser))
             {
-                MessageBox.Show("Пользователь не выбран!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Пользователь не выбран!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (string.IsNullOrEmpty(Message))
             {
-                MessageBox.Show("Введите сообщение!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Введите сообщение!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (Message.Length > 500)

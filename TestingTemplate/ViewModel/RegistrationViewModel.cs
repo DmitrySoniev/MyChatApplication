@@ -39,34 +39,11 @@ namespace TestingTemplate.ViewModel
         {
             #region CheckingValuesForNull
 
-            if (string.IsNullOrEmpty(RegistrationModel.Login))
-            {
-                MessageBox.Show("Введите логин!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             var passwordBox = param as PasswordBox;
             if (passwordBox == null)
                 return;
 
             var password = passwordBox.Password;
-            if (password == "")
-            {
-                MessageBox.Show("Введите пароль!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(RegistrationModel.Name))
-            {
-                MessageBox.Show("Введите имя!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(RegistrationModel.Surname))
-            {
-                MessageBox.Show("Введите Фамилию!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
 
             if (RegistrationModel.GenderMan == false && RegistrationModel.GenderWoman == false)
             {
@@ -75,34 +52,6 @@ namespace TestingTemplate.ViewModel
             }
 
             #endregion CheckingValuesForNull
-
-            #region ValuesLength
-
-            if (RegistrationModel.Login.Length > 40)
-            {
-                MessageBox.Show("Логин не должен превышать 40 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
-            }
-
-            if (password.Length > 20)
-            {
-                MessageBox.Show("Пароль не должен превышать 20 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
-            }
-
-            if (RegistrationModel.Name.Length > 15)
-            {
-                MessageBox.Show("Имя не должно превышать 15 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
-            }
-
-            if (RegistrationModel.Surname.Length > 25)
-            {
-                MessageBox.Show("Фамилия не должна превышать 25 символов!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
-            }
-
-            #endregion ValuesLength
 
             if (RegistrationModel.GenderMan)
             {
@@ -114,7 +63,7 @@ namespace TestingTemplate.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -133,7 +82,7 @@ namespace TestingTemplate.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
